@@ -1,9 +1,0 @@
-F:\个人\NetCore\NBCZ\NBCZ.Model\bin\Debug\netstandard2.0\NBCZ.Model.deps.json
-F:\个人\NetCore\NBCZ\NBCZ.Model\bin\Debug\netstandard2.0\NBCZ.Model.dll
-F:\个人\NetCore\NBCZ\NBCZ.Model\bin\Debug\netstandard2.0\NBCZ.Model.pdb
-F:\个人\NetCore\NBCZ\NBCZ.Model\obj\Debug\netstandard2.0\NBCZ.Model.csprojAssemblyReference.cache
-F:\个人\NetCore\NBCZ\NBCZ.Model\obj\Debug\netstandard2.0\NBCZ.Model.csproj.CoreCompileInputs.cache
-F:\个人\NetCore\NBCZ\NBCZ.Model\obj\Debug\netstandard2.0\NBCZ.Model.AssemblyInfoInputs.cache
-F:\个人\NetCore\NBCZ\NBCZ.Model\obj\Debug\netstandard2.0\NBCZ.Model.AssemblyInfo.cs
-F:\个人\NetCore\NBCZ\NBCZ.Model\obj\Debug\netstandard2.0\NBCZ.Model.dll
-F:\个人\NetCore\NBCZ\NBCZ.Model\obj\Debug\netstandard2.0\NBCZ.Model.pdb

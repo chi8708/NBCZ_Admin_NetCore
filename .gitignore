@@ -1,1 +1,13 @@
 /.vs/NBCZ/v15/Server/sqlite3/db.lock
+/NBCZ.Api/bin
+/NBCZ.Api/obj
+/NBCZ.BLL/obj
+/NBCZ.BLL/bin
+/NBCZ.Common/bin
+/NBCZ.Common/obj
+/NBCZ.DAL/obj
+/NBCZ.DAL/bin
+/NBCZ.DBUtility/bin
+/NBCZ.DBUtility/obj
+/NBCZ.Model/obj
+/NBCZ.Model/bin
