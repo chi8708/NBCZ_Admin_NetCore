@@ -1,0 +1,33 @@
+networks:
+  default:
+    external:
+      name: nat
+services:
+  nbcz.api:
+    build:
+      context: F:\个人\NetCore\NBCZ
+      dockerfile: NBCZ.Api\Dockerfile
+      target: base
+    entrypoint: C:\\remote_debugger\\x64\\msvsmon.exe /noauth /anyuser /silent /nostatus
+      /noclrwarn /nosecuritywarn /nofirewallwarn /nowowwarn /timeout:2147483646
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      DOTNET_USE_POLLING_FILE_WATCHER: '1'
+      NUGET_FALLBACK_PACKAGES: c:\.nuget\fallbackpackages
+      NUGET_PACKAGES: C:\.nuget\packages
+    image: nbczapi:dev
+    labels:
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath c:\.nuget\packages
+        --additionalProbingPath c:\.nuget\fallbackpackages  bin\Debug\netcoreapp2.0\NBCZ.Api.dll'
+      com.microsoft.visualstudio.debuggee.killprogram: C:\remote_debugger\x64\utils\KillProcess.exe
+        dotnet.exe
+      com.microsoft.visualstudio.debuggee.program: '"C:\Program Files\dotnet\dotnet.exe"'
+      com.microsoft.visualstudio.debuggee.workingdirectory: C:\app
+    ports:
+    - target: 80
+    volumes:
+    - F:\个人\NetCore\NBCZ\NBCZ.Api:C:\app:rw
+    - C:\Users\DELL\onecoremsvsmon\15.0.27703.2026:C:\remote_debugger:ro
+    - C:\Program Files\dotnet\sdk\NuGetFallbackFolder:c:\.nuget\fallbackpackages:ro
+    - C:\Users\DELL\.nuget\packages:c:\.nuget\packages:ro
+version: '3.4'

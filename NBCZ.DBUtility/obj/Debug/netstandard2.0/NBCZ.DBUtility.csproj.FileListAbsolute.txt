@@ -1,0 +1,13 @@
+F:\个人\NetCore\NBCZ\NBCZ.DBUtility\bin\Debug\netstandard2.0\NBCZ.DBUtility.deps.json
+F:\个人\NetCore\NBCZ\NBCZ.DBUtility\bin\Debug\netstandard2.0\NBCZ.DBUtility.dll
+F:\个人\NetCore\NBCZ\NBCZ.DBUtility\bin\Debug\netstandard2.0\NBCZ.DBUtility.pdb
+F:\个人\NetCore\NBCZ\NBCZ.DBUtility\bin\Debug\netstandard2.0\NBCZ.Common.dll
+F:\个人\NetCore\NBCZ\NBCZ.DBUtility\bin\Debug\netstandard2.0\NBCZ.Common.pdb
+F:\个人\NetCore\NBCZ\NBCZ.DBUtility\bin\Debug\netstandard2.0\NBCZ.Common.dll.config
+F:\个人\NetCore\NBCZ\NBCZ.DBUtility\obj\Debug\netstandard2.0\NBCZ.DBUtility.csprojAssemblyReference.cache
+F:\个人\NetCore\NBCZ\NBCZ.DBUtility\obj\Debug\netstandard2.0\NBCZ.DBUtility.csproj.CoreCompileInputs.cache
+F:\个人\NetCore\NBCZ\NBCZ.DBUtility\obj\Debug\netstandard2.0\NBCZ.DBUtility.AssemblyInfoInputs.cache
+F:\个人\NetCore\NBCZ\NBCZ.DBUtility\obj\Debug\netstandard2.0\NBCZ.DBUtility.AssemblyInfo.cs
+F:\个人\NetCore\NBCZ\NBCZ.DBUtility\obj\Debug\netstandard2.0\NBCZ.DBUtility.csproj.CopyComplete
+F:\个人\NetCore\NBCZ\NBCZ.DBUtility\obj\Debug\netstandard2.0\NBCZ.DBUtility.dll
+F:\个人\NetCore\NBCZ\NBCZ.DBUtility\obj\Debug\netstandard2.0\NBCZ.DBUtility.pdb

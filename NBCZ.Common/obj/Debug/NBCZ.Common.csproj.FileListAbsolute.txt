@@ -1,0 +1,10 @@
+F:\个人\NBCZ\NBCZ.Common\bin\Debug\NBCZ.Common.dll
+F:\个人\NBCZ\NBCZ.Common\bin\Debug\NBCZ.Common.pdb
+F:\个人\NBCZ\NBCZ.Common\bin\Debug\AutoMapper.dll
+F:\个人\NBCZ\NBCZ.Common\bin\Debug\log4net.dll
+F:\个人\NBCZ\NBCZ.Common\bin\Debug\TinyMapper.dll
+F:\个人\NBCZ\NBCZ.Common\bin\Debug\AutoMapper.xml
+F:\个人\NBCZ\NBCZ.Common\bin\Debug\log4net.xml
+F:\个人\NBCZ\NBCZ.Common\obj\Debug\NBCZ.Common.dll
+F:\个人\NBCZ\NBCZ.Common\obj\Debug\NBCZ.Common.pdb
+F:\个人\NBCZ\NBCZ.Common\obj\Debug\NBCZ.Common.csprojResolveAssemblyReference.cache

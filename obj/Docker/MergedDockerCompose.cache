@@ -1,0 +1,15 @@
+networks:
+  default:
+    external:
+      name: nat
+services:
+  nbcz.api:
+    build:
+      context: F:\个人\NetCore\NBCZ
+      dockerfile: NBCZ.Api\Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+    image: nbczapi
+    ports:
+    - target: 80
+version: '3.4'

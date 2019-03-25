@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+  nbcz.api:
+    image: nbczapi:dev
+    build:
+      target: base
+    environment:
+      - DOTNET_USE_POLLING_FILE_WATCHER=1
+      - NUGET_PACKAGES=C:\.nuget\packages
+      #- NUGET_FALLBACK_PACKAGES=$container_paths_to_fallback_packages_nbcz.api$
+    volumes:
+      - F:\个人\NetCore\NBCZ\NBCZ.Api:C:\app
+      - C:\Users\DELL\onecoremsvsmon:C:\remote_debugger:ro
+#$nuget_volume_mapping_nbcz.api$
+    entrypoint: C:\\remote_debugger\\x64\\msvsmon.exe /noauth /anyuser /silent /nostatus /noclrwarn /nosecuritywarn /nofirewallwarn /nowowwarn /timeout:2147483646
+    labels:
+      com.microsoft.visualstudio.debuggee.program: "\"C:\\Program Files\\dotnet\\dotnet.exe\""
+      #com.microsoft.visualstudio.debuggee.arguments: " $debuggee_arguments_probing_paths_nbcz.api$ bin\\Debug\\netcoreapp2.0\\NBCZ.Api.dll"
+      com.microsoft.visualstudio.debuggee.workingdirectory: "C:\\app"
+      com.microsoft.visualstudio.debuggee.killprogram: "C:\\remote_debugger\\x64\\utils\\KillProcess.exe dotnet.exe"

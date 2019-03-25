@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="T4.DapperExt\Service.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Service.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NBCZ.Common\NBCZ.Common.csproj" />
+    <ProjectReference Include="..\NBCZ.DAL\NBCZ.DAL.csproj" />
+    <ProjectReference Include="..\NBCZ.Model\NBCZ.Model.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="T4.DapperExt\Service.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Service.txt</LastGenOutput>
+      <LastOutputs>.\BaseService.cs</LastOutputs>
+    </None>
+    <None Update="T4.DapperExt\BaseService.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>BaseService.tt</DependentUpon>
+    </None>
+    <None Update="T4.DapperExt\Service.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Service.tt</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+</Project>

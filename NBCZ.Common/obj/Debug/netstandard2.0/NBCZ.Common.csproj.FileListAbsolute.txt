@@ -1,0 +1,10 @@
+F:\个人\NetCore\NBCZ\NBCZ.Common\bin\Debug\netstandard2.0\NBCZ.Common.dll.config
+F:\个人\NetCore\NBCZ\NBCZ.Common\bin\Debug\netstandard2.0\NBCZ.Common.deps.json
+F:\个人\NetCore\NBCZ\NBCZ.Common\bin\Debug\netstandard2.0\NBCZ.Common.dll
+F:\个人\NetCore\NBCZ\NBCZ.Common\bin\Debug\netstandard2.0\NBCZ.Common.pdb
+F:\个人\NetCore\NBCZ\NBCZ.Common\obj\Debug\netstandard2.0\NBCZ.Common.csprojAssemblyReference.cache
+F:\个人\NetCore\NBCZ\NBCZ.Common\obj\Debug\netstandard2.0\NBCZ.Common.csproj.CoreCompileInputs.cache
+F:\个人\NetCore\NBCZ\NBCZ.Common\obj\Debug\netstandard2.0\NBCZ.Common.AssemblyInfoInputs.cache
+F:\个人\NetCore\NBCZ\NBCZ.Common\obj\Debug\netstandard2.0\NBCZ.Common.AssemblyInfo.cs
+F:\个人\NetCore\NBCZ\NBCZ.Common\obj\Debug\netstandard2.0\NBCZ.Common.dll
+F:\个人\NetCore\NBCZ\NBCZ.Common\obj\Debug\netstandard2.0\NBCZ.Common.pdb
