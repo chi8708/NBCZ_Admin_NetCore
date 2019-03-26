@@ -14,12 +14,12 @@ namespace NBCZ.Common
         public static IConfiguration Configuration { get; set; }
         static AppConfigurtaionServices()
         {
-           // var baseDir = AppDomain.CurrentDomain.BaseDirectory;
+            // var baseDir = AppDomain.CurrentDomain.BaseDirectory;
             //ReloadOnChange = true 当appsettings.json被修改时重新加载        
             Configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
-           // .Add(new JsonConfigurationSource { Path = "appsettings.json",Optional=false, ReloadOnChange = true })
-            .Build();
+              // .Add(new JsonConfigurationSource { Path = "appsettings.json",Optional=false, ReloadOnChange = true })
+              .Build();
         }
     }
 }

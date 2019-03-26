@@ -13,10 +13,10 @@ using NBCZ.Model;
 using NBCZ.DAL;
 
 namespace NBCZ.BLL
-{	
-	public partial class Pub_DepartmentBLL:BaseServiceDapperContrib<Model.Pub_Department>
+{
+    public partial class Pub_DepartmentBLL : BaseServiceDapperContrib<Model.Pub_Department>
     {
-     
+
 
     }
 }
