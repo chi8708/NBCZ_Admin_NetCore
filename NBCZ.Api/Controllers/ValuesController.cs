@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Mvc;
 using NBCZ.BLL;
@@ -37,6 +38,9 @@ namespace NBCZ.Api.Controllers
 
         // POST api/values
         [HttpPost]
+        // application/x-www-form-urlencoded
+        //FromBody 后才能读到 application/json; charset=utf-8的值 ，但不能拿接收application/x-www-form-urlencoded类型
+        //[Consumes("application/json;charset=utf-8")]
         public void Post([FromBody]Pub_User value)
         {
             //  Request.EnableRewind();

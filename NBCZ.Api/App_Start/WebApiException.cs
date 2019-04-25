@@ -30,10 +30,12 @@ namespace NBCZ.Api
             var body = request.Body;
             var path= request.Path+request.QueryString;
             var postData = "";
-            if (request.Method.ToUpper()=="POST")
+            if (request.Method.ToUpper()=="POST"&& request.ContentLength > 0)
             {
-                if (request.ContentLength>0)
+                //application / json; charset = utf - 8
+                if (request.ContentType.IndexOf("application/json")>=0)
                 {
+                    //Microsoft.AspNetCore.Http.Internal 
                     //  Request.EnableRewind();
                     body.Position = 0;//body.Position = 0;才能读到数据
                     var bytes = new byte[body.Length];
