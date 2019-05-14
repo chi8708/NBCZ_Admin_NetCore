@@ -25,5 +25,10 @@
       },
       "applicationUrl": "http://localhost:8917/"
     }
+  },
+  "JwtSeetings": {
+    "Issuer": "http://localhost:29973",
+    "Audience": "http://localhost:29973",
+    "SecretKey": "cts1234567890"
   }
 }
