@@ -10,7 +10,7 @@ namespace NBCZ.Api
         /// <summary>
         /// 0请求数据错误 1 成功 -1失败
         /// </summary>
-        public int State { get; set; }
+        public int Code { get; set; }
 
         public string Message { get; set; }
 

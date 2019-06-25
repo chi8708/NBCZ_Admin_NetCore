@@ -107,11 +107,21 @@ namespace NBCZ.Api
             //jwt认证 需要在app.UseMvc()前调用
             app.UseAuthentication();
 
+            //跨域
+            app.UseCors(builder =>
+            {
+                builder.AllowAnyHeader();
+                builder.AllowAnyMethod();
+                builder.AllowAnyOrigin();
+                // builder.WithOrigins("http://localhost:8080");
+            });
+
             //app.UseIdentityServer();
             app.UseMvc();
   
             app.UseStaticFiles();
 
+          
         }
     }
 }

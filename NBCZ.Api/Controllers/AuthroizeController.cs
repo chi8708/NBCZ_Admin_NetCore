@@ -33,7 +33,7 @@ namespace NBCZ.Api.Controllers
             {
                 return BadRequest();
             }
-            var users = new Pub_UserBLL().GetList($"StopFlag=0 AND UserCode='{loginViewModel.Name}' AND UserPwd='{loginViewModel.Password}'", limits: 1);
+            var users = new Pub_UserBLL().GetList($"StopFlag=0 AND UserName='{loginViewModel.Name}' AND UserPwd='{loginViewModel.Password}'", limits: 1);
 
             if (users.Count>0)
             {
@@ -56,7 +56,7 @@ namespace NBCZ.Api.Controllers
                     );
                 return Ok(new ResponseObj<dynamic>()
                 {
-                    State = 1,
+                    Code = 1,
                     Message = "认证成功",
                     Data = new { Token = new JwtSecurityTokenHandler().WriteToken(token),
                     Expires = TypeUtil.ConvertDateTimeInt(expires) }
@@ -65,7 +65,7 @@ namespace NBCZ.Api.Controllers
 
             return Ok(new ResponseObj<dynamic>()
             {
-                State = 0,
+                Code = 0,
                 Message = "用户名密码错误！"
             });
             //return BadRequest();
