@@ -84,9 +84,13 @@ export default {
           const data = res.data
           if(data.code==1){
             commit('setToken', data.data.token)
-            resolve()
+            resolve(data)
           }
-         
+          else {
+            resolve(data);
+            //alert(data.message);
+          }
+          return data;
         }).catch(err => {
           reject(err)
         })

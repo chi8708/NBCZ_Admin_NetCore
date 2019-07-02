@@ -29,6 +29,10 @@ export default {
     ]),
     handleSubmit ({ userName, password }) {
       this.handleLogin({ userName, password }).then(res => {
+        if(res.code!=1){
+           this.$Message.error(res.message);
+           return;
+        }
         this.getUserInfo().then(res => {
           this.$router.push({
             name: this.$config.homeName
