@@ -85,9 +85,10 @@ export default [
         name: 'userManage',
         meta: {
           icon: 'md-arrow-dropdown-circle',
+          notCache: true,
           title: '用户信息'
         },
-        component: () => import('@/view/components/tree-select/index.vue')
+        component: () => import('@/view/User/List.vue')
       },
       {
         path: 'roleManage',
@@ -134,7 +135,7 @@ export default [
           icon: 'md-flower',
           title: route => `{{ params }}-${route.params.id}`,
           notCache: true,
-          beforeCloseName: 'before_close_normal'
+         // beforeCloseNamebeforeCloseName: 'before_close_normal'
         },
         component: () => import('@/view/argu-page/params.vue')
       },

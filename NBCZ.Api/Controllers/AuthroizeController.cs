@@ -47,7 +47,9 @@ namespace NBCZ.Api.Controllers
                     new Claim(ClaimTypes.Name,user.UserName),
                     new Claim(ClaimTypes.Sid,user.Id.ToString()),
                     new Claim(ClaimTypes.NameIdentifier,user.UserCode),
-                    new Claim(ClaimTypes.UserData,functionsStr)
+                    new Claim(ClaimTypes.UserData,functionsStr),
+                    new Claim(ClaimTypes.MobilePhone,user.Tel),
+                    new Claim(ClaimTypes.GroupSid,user.DeptCode)
                 };
                 var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSeetings.SecretKey));
                 var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);

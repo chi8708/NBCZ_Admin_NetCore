@@ -60,6 +60,10 @@ class HttpRequest {
           request: { responseURL: config.url }
         }
       }
+      //cts add
+      if(errorInfo.status=="401"){
+        window.location.reload();
+      }
       addErrorLog(errorInfo)
       return Promise.reject(error)
     })
