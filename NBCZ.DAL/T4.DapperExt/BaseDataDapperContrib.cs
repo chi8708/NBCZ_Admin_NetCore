@@ -277,7 +277,7 @@ namespace NBCZ.DAL
         /// <param name="resultsPerPage">页大小</param>
         /// <param name="fields">查询字段</param>
         /// <returns></returns>
-        public PageDateRep<T> GetPage(string where, string sort, int page, int resultsPerPage, string fields = "*", Type result = null)
+        public PageDateRes<T> GetPage(string where, string sort, int page, int resultsPerPage, string fields = "*", Type result = null)
         {
             var tableName = typeof(T).Name;
             var p = new DynamicParameters();
@@ -297,9 +297,9 @@ namespace NBCZ.DAL
                 int totalPage = p.Get<int>("@TotalPage");
                 int totalrow = p.Get<int>("@Totalrow");
 
-                var rep = new PageDateRep<T>()
+                var rep = new PageDateRes<T>()
                 {
-                    code = 0,
+                    code =ResCode.Success,
                     count = totalrow,
                     totalPage = totalPage,
                     data = data.ToList(),

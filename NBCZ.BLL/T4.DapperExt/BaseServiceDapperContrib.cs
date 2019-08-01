@@ -137,7 +137,7 @@ namespace NBCZ.BLL
         /// <param name="resultsPerPage"></param>
         /// <returns></returns>
 
-        public PageDateRep<T> GetPage(string where, string sort, int page, int resultsPerPage, string fields = "*")
+        public PageDateRes<T> GetPage(string where, string sort, int page, int resultsPerPage, string fields = "*")
         {
             return dal.GetPage(where, sort, page, resultsPerPage, fields);
         }

@@ -72,6 +72,7 @@ export default [
     ]
   },
   {
+   
     path: '/baseSet',
     name: 'baseSet',
     meta: {
@@ -81,6 +82,7 @@ export default [
     component: Main,
     children: [
       {
+       
         path: 'userManage',
         name: 'userManage',
         meta: {

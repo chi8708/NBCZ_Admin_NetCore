@@ -55,6 +55,14 @@ namespace NBCZ.Api.Controllers
         {
             var users = userDeptBLL.GetPage(GetWhereStr(), (pageReq.field + " " + pageReq.order), pageReq.pageNum, pageReq.pageSize);
 
+          //  PageDateRes<V_PubUser_DeptExt> users = usersPage.MapTo<PageDateRes <V_PubUser_Dept>,PageDateRes <V_PubUser_DeptExt>>();
+            var userCodes = string.Join("','",users.data.Select(p => p.UserCode));
+            List<Pub_UserRole> userRoles = userRoleBLL.GetList( $"userCode in ('{userCodes}')");
+            users.data.ForEach(p =>
+            {
+                p.RoleCodes = userRoles.Where(c => c.UserCode == p.UserCode).Select(d=>d.RoleCode);
+            });
+
             return Json(users);
         }
 
