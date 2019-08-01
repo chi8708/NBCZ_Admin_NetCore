@@ -22,18 +22,23 @@ foreach(DbTable dbTable in dtList)
 //------------------------------------------------------------------------------
 
 using System;
+using Dapper.Contrib.Extensions;
 
 namespace <#=Config.Namespace#>.Model
 {	
-
+   
+   [Table("<#=tableName#>")]
     public partial class <#=tableName#>
     {
 
 	   <# foreach(DbColumn column in dbColList){#>
-    /// <summary>
+/// <summary>
      	/// <#=column.Remark#>
      	/// </summary>
-		public <#= column.IsNullCSharpType#> <#=column.ColumnName#> { get; set; }
+	<#if(primaryKey!=null&&column.ColumnName==primaryKey.ColumnName){#>
+	[Key]
+	<#}#>
+	public <#= column.IsNullCSharpType#> <#=column.ColumnName#> { get; set; }
 
 		<#}#>   
     }

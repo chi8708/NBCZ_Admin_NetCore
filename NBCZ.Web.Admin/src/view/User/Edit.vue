@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- Id, UserCode, UserName, RealName, UserPwd, Sex, IdentityNo, Birthday, DeptCode, ManagerFlag, Tel, EMail, QQ, Remark, StopFlag, Crid, Crdt, Lmid, Lmdt, LoginDate, ProvinceCode, CityCode, RegionCode, UserAddress, Wxcode, HeadUrl -->
-    <Form label-position="right" :model="Row" :rules="ruleUser" :label-width="100">
+    <Form ref="formInline" label-position="right" :model="Row" :rules="ruleUser" :label-width="100">
       <Row>
         <Col span="12">
           <FormItem label="用户名" prop="userName">
@@ -22,7 +22,7 @@
         </Col>
         <Col span="12">
           <FormItem label="部门">
-             <Input search enter-button v-model="Row.deptName" readonly @on-search="DeptSelect" />
+            <Input search enter-button v-model="Row.deptName" readonly @on-search="DeptSelect" />
             <!-- <Tree :data="DeptTree"></Tree> -->
             <!-- <Input type="password" v-model="Row.deptCode" /> -->
           </FormItem>
@@ -74,25 +74,33 @@
           </FormItem>
         </Col>
       </Row>
-      <Row  >
-        <Col span="24" >
+      <Row>
+        <Col span="24">
           <div style="text-align:center;">
-               <Button @click="parent.modelEdit=false">取消</Button>
-               <Button style="margin-left:20px;" type="primary">保存</Button>
+            <Button @click="parent.modelEdit=false">取消</Button>
+            <Button style="margin-left:20px;" type="primary" @click="Save('formInline')">保存</Button>
           </div>
-        
         </Col>
       </Row>
     </Form>
-     
-    <Modal title="选择部门"  :mask-closable="false"   v-model="modelDept" width="300"  scrollable  footer-hide>
-        <Tree :data="DeptTree" @on-select-change="DeptTreeChange"></Tree>
+
+    <Modal
+      title="选择部门"
+      :mask-closable="false"
+      v-model="modelDept"
+      width="300"
+      scrollable
+      footer-hide
+    >
+      <Tree :data="DeptTree" @on-select-change="DeptTreeChange"></Tree>
     </Modal>
   </div>
 </template>
 <script>
 import { getRoles } from "@/api/pubRole";
 import { getDepts } from "@/api/pubDept";
+import { add as addUser, edit as editUser } from "@/api/pubUser";
+import { truncate, truncateSync } from "fs";
 export default {
   props: { editRow: Object, parent: Object },
   computed: {},
@@ -103,7 +111,7 @@ export default {
       Depts: [],
       DeptTree: [],
       DeptTreeItems: [],
-      modelDept:false,
+      modelDept: false,
       ruleUser: {
         userName: [
           {
@@ -129,10 +137,10 @@ export default {
     };
   },
   methods: {
-    SaveEdit() {
-      //console.log(this.Row);
-      //this.parent.modalEdit=true;
-    },
+    // SaveEdit() {
+    //   //console.log(this.Row);
+    //   //this.parent.modalEdit=true;
+    // },
     GetRoles() {
       getRoles()
         .then(res => {
@@ -167,46 +175,106 @@ export default {
       }
     },
     LoadDeptTreeItem(treeItemData) {
-
-      var treeItem=
-      {
+      var treeItem = {
         title: treeItemData.deptName,
-        expand: true, 
+        expand: true,
         value: treeItemData.deptCode
       };
       this.DeptTreeItems.push(treeItem);
       if (treeItemData.parentCode) {
         //foreach 无法终止循环
-          this.DeptTreeItems.every(element => {
+        this.DeptTreeItems.every(element => {
           if (element.value == treeItemData.parentCode) {
             if (!element.children) {
               element.children = [];
             }
-            element.children.push(
-              treeItem
-              );
+            element.children.push(treeItem);
             return false;
           }
           return true;
         });
       } else {
-        this.DeptTree.push(
-          treeItem
-        );
+        this.DeptTree.push(treeItem);
       }
     },
-    DeptSelect(){
-      if(!this.Depts||this.Depts.length<=0){
+    DeptSelect() {
+      if (!this.Depts || this.Depts.length <= 0) {
         this.GetDepts();
       }
 
-      this.modelDept=true;
+      this.modelDept = true;
     },
-    DeptTreeChange(data){
-      var item0=data[0];
-      this.Row.deptName=item0.title;
-      this.Row.deptCode=item0.value;
-      this.modelDept=false;
+    DeptTreeChange(data) {
+      var item0 = data[0];
+      this.Row.deptName = item0.title;
+      this.Row.deptCode = item0.value;
+      this.modelDept = false;
+    },
+    Save() {
+      if (this.parent.isAdd) {
+        this.SaveAdd();
+      } else {
+        this.SaveEdit();
+      }
+    },
+    SaveAdd() {
+      this.SaveValidate().then(r => {
+        if (r) {
+          addUser(this.Row)
+            .then(res => {
+              const resData = res.data;
+              const data = resData.data;
+              const code = resData.code;
+              const msg = resData.msg;
+              if (code == 1) {
+                this.$Message.info("添加成功");
+                this.parent.modelEdit=false;
+                this.parent.setPageData(1);
+              } else {
+                this.$Message.error({
+                  content: msg,
+                  duration: 10,
+                  closable: true
+                });
+              }
+            })
+            .catch(err => {});
+        }
+      });
+    },
+    SaveEdit() {
+      this.SaveValidate().then(r => {
+        if (!r) {
+          return;
+        }
+      });
+      editUser(this.Row)
+        .then(res => {
+          const resData = res.data;
+          const data = resData.data;
+          const code = resData.code;
+          const msg = resData.msg;
+          if (code == 1) {
+            this.$Message.info("编辑成功");
+             this.parent.modelEdit=false;
+          } else {
+            this.$Message.error({ content: msg, duration: 10, closable: true });
+          }
+        })
+        .catch(err => {});
+    },
+    SaveValidate(name = "formInline") {
+      return this.$refs[name].validate(valid => {
+        if (!valid) {
+          this.$Message.warning("请检查表单数据！");
+          return false;
+        } else {
+          return true;
+        }
+      });
+    },
+    handleReset(name = "formInline") {
+      this.$refs[name].resetFields();
     }
   },
   watch: {

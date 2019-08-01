@@ -186,6 +186,7 @@ export default {
       });
     },
     handleAdd() {
+      this.$refs.edit.handleReset();
       this.modelEdit = true;
       this.isAdd=true;
        this.eidtRow={};

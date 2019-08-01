@@ -18,6 +18,7 @@ namespace NBCZ.Api.Controllers
     [Route("api/PubUser")]
     public class PubUserController : Controller
     {
+        private Pub_UserBLL bll = new Pub_UserBLL();
         private V_PubUser_DeptBLL userDeptBLL = new V_PubUser_DeptBLL();
         private Pub_UserRoleBLL userRoleBLL = new Pub_UserRoleBLL();
 
@@ -37,11 +38,12 @@ namespace NBCZ.Api.Controllers
             var userName = user.UserName;
             var userCode = user.UserCode;
             var access = user.Access;
-            return new {
-                access=access,
+            return new
+            {
+                access = access,
                 avatar = "https://file.iviewui.com/dist/a0e88e83800f138b94d2414621bd9704.png",
                 name = userName,
-                user_id=userCode
+                user_id = userCode
             };
         }
 
@@ -51,16 +53,16 @@ namespace NBCZ.Api.Controllers
         /// <returns></returns>
         [Route("GetPage")]
         [HttpPost]
-        public JsonResult GetPage([FromBody]PageDataReq pageReq )
+        public JsonResult GetPage([FromBody]PageDataReq pageReq)
         {
             var users = userDeptBLL.GetPage(GetWhereStr(), (pageReq.field + " " + pageReq.order), pageReq.pageNum, pageReq.pageSize);
 
-          //  PageDateRes<V_PubUser_DeptExt> users = usersPage.MapTo<PageDateRes <V_PubUser_Dept>,PageDateRes <V_PubUser_DeptExt>>();
-            var userCodes = string.Join("','",users.data.Select(p => p.UserCode));
-            List<Pub_UserRole> userRoles = userRoleBLL.GetList( $"userCode in ('{userCodes}')");
+            //  PageDateRes<V_PubUser_DeptExt> users = usersPage.MapTo<PageDateRes <V_PubUser_Dept>,PageDateRes <V_PubUser_DeptExt>>();
+            var userCodes = string.Join("','", users.data.Select(p => p.UserCode));
+            List<Pub_UserRole> userRoles = userRoleBLL.GetList($"userCode in ('{userCodes}')");
             users.data.ForEach(p =>
             {
-                p.RoleCodes = userRoles.Where(c => c.UserCode == p.UserCode).Select(d=>d.RoleCode);
+                p.RoleCodes = userRoles.Where(c => c.UserCode == p.UserCode).Select(d => d.RoleCode);
             });
 
             return Json(users);
@@ -71,9 +73,58 @@ namespace NBCZ.Api.Controllers
             StringBuilder sb = new StringBuilder(" 1=1 ");
             sb.Append(" and StopFlag=0 ");
 
-         //   sb.AppendFormat(" and {0} ", this.HttpContext.GetWhereStr());
+            //   sb.AppendFormat(" and {0} ", this.HttpContext.GetWhereStr());
 
             return sb.ToString();
+        }
+
+
+        /// <summary>
+        /// 添加用户
+        /// </summary>
+        /// <returns></returns>
+        [Route("Add")]
+        [HttpPost]
+        public DataRes<bool> Add([FromBody]V_PubUser_Dept model)
+        {
+            DataRes<bool> res = new DataRes<bool>() { code = ResCode.Success, data = true };
+
+            model.Crdt = model.Lmdt = DateTime.Now;
+            var user = new NBCZUser(User);
+            model.Crid = model.Lmid = $"{user.UserCode}-{user.UserName}";
+            var r = bll.Add(model);
+            if (!r.Item1)
+            {
+                res.code = ResCode.Error;
+                res.data = false;
+                res.msg = r.Item2;
+            }
+
+            return res;
+        }
+
+        /// <summary>
+        /// 编辑用户
+        /// </summary>
+        /// <returns></returns>
+        [Route("Edit")]
+        [HttpPost]
+        public DataRes<bool> Edit([FromBody]V_PubUser_Dept model)
+        {
+            DataRes<bool> res = new DataRes<bool>() { code = ResCode.Success, data = true };
+
+            model.Lmdt = DateTime.Now;
+            var user = new NBCZUser(User);
+            model.Lmid = $"{user.UserCode}-{user.UserName}";
+            var r = bll.Edit(model);
+            if (!r.Item1)
+            {
+                res.code = ResCode.Error;
+                res.data = false;
+                res.msg = r.Item2;
+            }
+
+            return res;
         }
     }
 }
