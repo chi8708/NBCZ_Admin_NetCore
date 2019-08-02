@@ -30,7 +30,7 @@
 
 三、主界面如下：
 ---------------
-![avatar](https://github.com/chi8708/NBCZ/blob/master/1529981048.jpg)
+<img src="https://github.com/chi8708/NBCZ_Admin_NetCore/blob/master/main.png" width="900px;">
 
 四、参考文档
 --------------------------
