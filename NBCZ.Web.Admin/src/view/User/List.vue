@@ -1,12 +1,20 @@
 
 <template>
-  <div >
+  <div>
     <div class="search-con search-con-top">
-      用户名：
-      <Input placeholder="default size" class="search-input" />
-      <Button class="search-btn" type="primary">
-        <Icon type="search" />&nbsp;&nbsp;搜索
-      </Button>
+      <Form ref="formInline" label-position="right" :label-width="60" inline>
+        <FormItem label="用户名">
+          <Input class="search-input" v-model="queryData.SL_UserName" />
+        </FormItem>
+        <FormItem label="电话">
+          <Input class="search-input" v-model="queryData.SL_Tel" />
+        </FormItem>
+        <FormItem>
+          <Button class="search-btn" type="primary" @click="setPageData(1)">
+            <Icon type="search" />&nbsp;&nbsp;搜索
+          </Button>
+        </FormItem>
+      </Form>
     </div>
 
     <Card>
@@ -33,19 +41,24 @@
     </Card>
 
     <!--垂直居中 class-name="vertical-center-modal" 和draggable冲突 draggable后mask强制变为false-->
-    <Modal title="编辑"  :mask-closable="false"   v-model="modelEdit" width="800"  scrollable footer-hide
-    @on-ok="SaveEdit"
+    <Modal
+      title="编辑"
+      :mask-closable="false"
+      v-model="modelEdit"
+      width="800"
+      scrollable
+      footer-hide
+      @on-ok="saveEdit"
     >
-      <Edit ref="edit" :parent='this' :edit-row="eidtRow" ></Edit>
+      <Edit ref="edit" :parent="this" :edit-row="eidtRow"></Edit>
     </Modal>
   </div>
 </template>
 <script>
 //import Tables from '_c/tables'
 import "@/assets/css/util.less";
-import "@/components/tables/index.less";
 import Edit from "./Edit";
-import { getPage } from "@/api/pubUser";
+import { getPage, remove as removeUser } from "@/api/pubUser";
 
 export default {
   //  name: 'tables_page',
@@ -56,10 +69,11 @@ export default {
   data() {
     return {
       tableData1: [],
+      queryData: {},
       pageTotal: 0,
       pageCurrent: 1,
       modelEdit: false,
-      isAdd:true,
+      isAdd: true,
       eidtRow: {},
       tableColumns1: [
         {
@@ -144,15 +158,22 @@ export default {
   },
   computed: {},
   methods: {
-    setPageData(pageNum, pageSize = 10) {
+    setPageData(pageNum = this.pageCurrent, pageSize = 10) {
       getPage({
         pageNum: pageNum,
         pageSize: pageSize,
         field: "Id",
-        order: "asc"
+        order: "asc",
+        query: this.queryData
       })
         .then(res => {
           const resData = res.data;
+          const code = resData.code;
+          const msg = resData.msg;
+          if (code != 1) {
+            this.$Message.error(code.msg);
+            return;
+          }
           const data = resData.data;
           this.tableData1 = data;
           this.pageTotal = resData.count;
@@ -180,24 +201,42 @@ export default {
         title: "提示",
         content: "<p>确定要删除[" + row.id + "]?</p>",
         onOk: () => {
-          this.$Message.info("Clicked ok");
+          // this.$Message.info("Clicked ok");
+          this.removeUser(row);
         },
-        onCancel: () => {}
+        onCancel: row => {}
       });
     },
     handleAdd() {
       this.$refs.edit.handleReset();
       this.modelEdit = true;
-      this.isAdd=true;
-       this.eidtRow={};
+      this.isAdd = true;
+      this.eidtRow = {};
     },
     handleEdit(params) {
       this.modelEdit = true;
-      this.isAdd=false;
+      this.isAdd = false;
       this.eidtRow = params.row;
     },
-    SaveEdit(){
-      var row= this.$refs.edit.Row;
+    removeUser(row) {
+      var id = row.id;
+      removeUser(id)
+        .then(res => {
+          const resData = res.data;
+          const data = resData.data;
+          const code = resData.code;
+          const msg = resData.msg;
+          if (code == 1) {
+            this.$Message.info("删除成功");
+            this.setPageData();
+          } else {
+            this.$Message.error({ content: msg, duration: 10, closable: true });
+          }
+        })
+        .catch(err => {});
+    },
+    saveEdit() {
+      var row = this.$refs.edit.Row;
     }
   },
   mounted() {

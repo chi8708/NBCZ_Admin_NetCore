@@ -29,7 +29,6 @@ namespace NBCZ.Api
             // 指定配置文件
             XmlConfigurator.Configure(repository, new FileInfo("log4net.config"));
 
-
         }
 
 
@@ -40,9 +39,10 @@ namespace NBCZ.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc(
-                o=>o.Filters.Add(typeof(WebApiExceptionAttribute))//全局异常
-                );
+            //1.全局异常 2.Json 日期格式化
+            services
+                .AddMvc(o=> {o.Filters.Add(typeof(WebApiExceptionAttribute)) ; })
+                .AddJsonOptions(options =>{options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss";});
 
             //参考 https://www.cnblogs.com/aishangyipiyema/p/9262642.html
             JWTConfig(services);
@@ -121,6 +121,7 @@ namespace NBCZ.Api
   
             app.UseStaticFiles();
 
+           
           
         }
     }

@@ -4,12 +4,13 @@ import store from '@/store'
 var token=store.state.user.token;
 
 //分页
-export const getPage = ({pageNum ,  pageSize ,  field ,  order  }) => {
+export const getPage = ({pageNum ,  pageSize ,  field ,  order,query={}  }) => {
   const data = {
     pageNum:pageNum,
     pageSize:pageSize,
     field:field,
-    order:order
+    order:order,
+    query:query
   }
   return axios.request({
     url: 'api/PubUser/GetPage',
@@ -38,6 +39,15 @@ export const edit=(model)=>{
     url: 'api/PubUser/Edit',
     headers: {Authorization:"Bearer "+token},
     data,
+    method: 'post'
+  })
+}
+
+//停用
+export const remove=(id)=>{
+  return axios.request({
+    url: 'api/PubUser/Delete/'+id,
+    headers: {Authorization:"Bearer "+token},
     method: 'post'
   })
 }

@@ -16,7 +16,7 @@ namespace NBCZ.Api.Controllers
     [Produces("application/json")]
     [Authorize]
     [Route("api/PubUser")]
-    public class PubUserController : Controller
+    public class PubUserController : BaseController
     {
         private Pub_UserBLL bll = new Pub_UserBLL();
         private V_PubUser_DeptBLL userDeptBLL = new V_PubUser_DeptBLL();
@@ -53,9 +53,14 @@ namespace NBCZ.Api.Controllers
         /// <returns></returns>
         [Route("GetPage")]
         [HttpPost]
-        public JsonResult GetPage([FromBody]PageDataReq pageReq)
+        public PageDateRes<V_PubUser_Dept> GetPage([FromBody]PageDataReq pageReq)
         {
-            var users = userDeptBLL.GetPage(GetWhereStr(), (pageReq.field + " " + pageReq.order), pageReq.pageNum, pageReq.pageSize);
+            var whereStr = GetWhereStr();
+            if (whereStr=="-1")
+            {
+                return new PageDateRes<V_PubUser_Dept>() {code=ResCode.Error,msg="查询参数有误！",data=null };
+            }
+            var users = userDeptBLL.GetPage(whereStr, (pageReq.field + " " + pageReq.order), pageReq.pageNum, pageReq.pageSize);
 
             //  PageDateRes<V_PubUser_DeptExt> users = usersPage.MapTo<PageDateRes <V_PubUser_Dept>,PageDateRes <V_PubUser_DeptExt>>();
             var userCodes = string.Join("','", users.data.Select(p => p.UserCode));
@@ -65,15 +70,19 @@ namespace NBCZ.Api.Controllers
                 p.RoleCodes = userRoles.Where(c => c.UserCode == p.UserCode).Select(d => d.RoleCode);
             });
 
-            return Json(users);
+            return users;
         }
 
         private string GetWhereStr()
         {
             StringBuilder sb = new StringBuilder(" 1=1 ");
             sb.Append(" and StopFlag=0 ");
-
-            //   sb.AppendFormat(" and {0} ", this.HttpContext.GetWhereStr());
+            var query = this.HttpContext.GetWhereStr();
+            if (query=="-1")
+            {
+                return query;
+            }
+            sb.AppendFormat(" and {0} ", query);
 
             return sb.ToString();
         }
@@ -126,5 +135,27 @@ namespace NBCZ.Api.Controllers
 
             return res;
         }
+
+        /// <summary>
+        /// 删除用户
+        /// </summary>
+        /// <returns></returns>
+        [Route("Delete/{id}")]
+        [HttpPost]
+        public DataRes<bool> Delete(long id)
+        {
+            DataRes<bool> res = new DataRes<bool>() { code = ResCode.Success, data = true };
+
+            var r = bll.ChangeSotpStatus($"id={id}",null);
+            if (!r)
+            {
+                res.code = ResCode.Error;
+                res.data = false;
+                res.msg = "删除失败";
+            }
+
+            return res;
+        }
+        
     }
 }

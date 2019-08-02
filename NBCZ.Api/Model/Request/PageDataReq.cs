@@ -13,5 +13,7 @@ namespace NBCZ.Api.Model.Request
 
         public string field { get; set; }
         public string order { get; set; }
-    }
+
+        public Dictionary<string, object> query{ get; set; }
+}
 }

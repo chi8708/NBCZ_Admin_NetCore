@@ -22,7 +22,7 @@
         </Col>
         <Col span="12">
           <FormItem label="部门">
-            <Input search enter-button v-model="Row.deptName" readonly @on-search="DeptSelect" />
+            <Input search enter-button v-model="Row.deptName" readonly @on-search="deptSelect" />
             <!-- <Tree :data="DeptTree"></Tree> -->
             <!-- <Input type="password" v-model="Row.deptCode" /> -->
           </FormItem>
@@ -78,7 +78,7 @@
         <Col span="24">
           <div style="text-align:center;">
             <Button @click="parent.modelEdit=false">取消</Button>
-            <Button style="margin-left:20px;" type="primary" @click="Save('formInline')">保存</Button>
+            <Button style="margin-left:20px;" type="primary" @click="save('formInline')">保存</Button>
           </div>
         </Col>
       </Row>
@@ -92,7 +92,7 @@
       scrollable
       footer-hide
     >
-      <Tree :data="DeptTree" @on-select-change="DeptTreeChange"></Tree>
+      <Tree :data="DeptTree" @on-select-change="deptTreeChange"></Tree>
     </Modal>
   </div>
 </template>
@@ -137,11 +137,11 @@ export default {
     };
   },
   methods: {
-    // SaveEdit() {
+    // saveEdit() {
     //   //console.log(this.Row);
     //   //this.parent.modalEdit=true;
     // },
-    GetRoles() {
+    getRoles() {
       getRoles()
         .then(res => {
           const resData = res.data;
@@ -150,31 +150,31 @@ export default {
         })
         .catch(err => {});
     },
-    GetDepts() {
+    getDepts() {
       getDepts()
         .then(res => {
           const resData = res.data;
           const data = resData.data;
           this.Depts = data;
-          this.LoadDeptTree();
+          this.loadDeptTree();
         })
         .catch(err => {});
     },
-    LoadDeptTree() {
+    loadDeptTree() {
       var treeRoot = this.Depts.filter(p => p.parentCode == "");
-      this.LoadDeptTreeChild(treeRoot);
+      this.loadDeptTreeChild(treeRoot);
     },
-    LoadDeptTreeChild(treeData) {
+    loadDeptTreeChild(treeData) {
       for (let index = 0; index < treeData.length; index++) {
         const element = treeData[index];
-        this.LoadDeptTreeItem(element);
+        this.loadDeptTreeItem(element);
         const child = this.Depts.filter(p => p.parentCode == element.deptCode);
         if (child && child.length > 0) {
-          this.LoadDeptTreeChild(child);
+          this.loadDeptTreeChild(child);
         }
       }
     },
-    LoadDeptTreeItem(treeItemData) {
+    loadDeptTreeItem(treeItemData) {
       var treeItem = {
         title: treeItemData.deptName,
         expand: true,
@@ -197,28 +197,28 @@ export default {
         this.DeptTree.push(treeItem);
       }
     },
-    DeptSelect() {
+    deptSelect() {
       if (!this.Depts || this.Depts.length <= 0) {
-        this.GetDepts();
+        this.getDepts();
       }
 
       this.modelDept = true;
     },
-    DeptTreeChange(data) {
+    deptTreeChange(data) {
       var item0 = data[0];
       this.Row.deptName = item0.title;
       this.Row.deptCode = item0.value;
       this.modelDept = false;
     },
-    Save() {
+    save() {
       if (this.parent.isAdd) {
-        this.SaveAdd();
+        this.saveAdd();
       } else {
-        this.SaveEdit();
+        this.saveEdit();
       }
     },
-    SaveAdd() {
-      this.SaveValidate().then(r => {
+    saveAdd() {
+      this.saveValidate().then(r => {
         if (r) {
           addUser(this.Row)
             .then(res => {
@@ -231,19 +231,15 @@ export default {
                 this.parent.modelEdit=false;
                 this.parent.setPageData(1);
               } else {
-                this.$Message.error({
-                  content: msg,
-                  duration: 10,
-                  closable: true
-                });
+                this.$Message.error({content: msg,duration: 10,closable: true});
               }
             })
             .catch(err => {});
         }
       });
     },
-    SaveEdit() {
-      this.SaveValidate().then(r => {
+    saveEdit() {
+      this.saveValidate().then(r => {
         if (!r) {
           return;
         }
@@ -256,14 +252,15 @@ export default {
           const msg = resData.msg;
           if (code == 1) {
             this.$Message.info("编辑成功");
-             this.parent.modelEdit=false;
+            this.parent.modelEdit=false;
+            this.parent.setPageData();
           } else {
             this.$Message.error({ content: msg, duration: 10, closable: true });
           }
         })
         .catch(err => {});
     },
-    SaveValidate(name = "formInline") {
+    saveValidate(name = "formInline") {
       return this.$refs[name].validate(valid => {
         if (!valid) {
           this.$Message.warning("请检查表单数据！");
@@ -284,7 +281,7 @@ export default {
     }
   },
   mounted() {
-    this.GetRoles();
+    this.getRoles();
   }
 };
 </script>
