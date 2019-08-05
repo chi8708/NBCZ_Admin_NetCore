@@ -1,10 +1,12 @@
-一、框架概述
+一、框架概述 <a href="https://github.com/chi8708/NBCZ_Admin">转至.net framework+layui项目</a>
 -------------
-1. NBCZ_Admin_NetCore是一个前后端分离通用权限系统， 用vs2017+sqlserver2008开发工具。
+1. NBCZ_Admin_NetCore是一个前后端分离通用权限系统， 用vs2017+sqlserver2012开发工具。
 2. 后端标准三层结构：
    1. 基于NETStandard2.0标准类库。
    2. Repository（DAL仓储层）使用Dapper.Contrib+Dapper开发。
    3. api使用asp.net core webapi,jwt身份认证。
+3. 前端
+   1.基于vue的iview框架。
 --------  
 
 二、配置使用
