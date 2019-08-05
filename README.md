@@ -6,7 +6,7 @@
    2. Repository（DAL仓储层）使用Dapper.Contrib+Dapper开发。
    3. api使用asp.net core webapi,jwt身份认证。
 3. 前端
-   1.基于vue的iview框架。
+   1. 基于vue的iview框架。
 --------  
 
 二、配置使用
