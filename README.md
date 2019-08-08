@@ -37,7 +37,7 @@
 四、参考文档
 --------------------------
 - Dapper：https://github.com/StackExchange/Dapper
-- Dapper-Extensions：https://github.com/StackExchange/Dapper/tree/master/Dapper.Contrib
+- Dapper.Contrib：https://github.com/StackExchange/Dapper/tree/master/Dapper.Contrib
 * iview： https://www.iviewui.com/
 * iview-admin：http://admin.iviewui.com/login
 
