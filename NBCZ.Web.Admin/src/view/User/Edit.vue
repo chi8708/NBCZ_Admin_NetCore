@@ -228,10 +228,14 @@ export default {
               const msg = resData.msg;
               if (code == 1) {
                 this.$Message.info("添加成功");
-                this.parent.modelEdit=false;
+                this.parent.modelEdit = false;
                 this.parent.setPageData(1);
               } else {
-                this.$Message.error({content: msg,duration: 10,closable: true});
+                this.$Message.error({
+                  content: msg,
+                  duration: 10,
+                  closable: true
+                });
               }
             })
             .catch(err => {});
@@ -240,25 +244,28 @@ export default {
     },
     saveEdit() {
       this.saveValidate().then(r => {
-        if (!r) {
-          return;
+        if (r) {
+          editUser(this.Row)
+            .then(res => {
+              const resData = res.data;
+              const data = resData.data;
+              const code = resData.code;
+              const msg = resData.msg;
+              if (code == 1) {
+                this.$Message.info("编辑成功");
+                this.parent.modelEdit = false;
+                this.parent.setPageData();
+              } else {
+                this.$Message.error({
+                  content: msg,
+                  duration: 10,
+                  closable: true
+                });
+              }
+            })
+            .catch(err => {});
         }
       });
-      editUser(this.Row)
-        .then(res => {
-          const resData = res.data;
-          const data = resData.data;
-          const code = resData.code;
-          const msg = resData.msg;
-          if (code == 1) {
-            this.$Message.info("编辑成功");
-            this.parent.modelEdit=false;
-            this.parent.setPageData();
-          } else {
-            this.$Message.error({ content: msg, duration: 10, closable: true });
-          }
-        })
-        .catch(err => {});
     },
     saveValidate(name = "formInline") {
       return this.$refs[name].validate(valid => {

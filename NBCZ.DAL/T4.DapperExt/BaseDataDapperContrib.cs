@@ -268,6 +268,7 @@ namespace NBCZ.DAL
 
 
 
+
         /// <summary>
         /// 存储过程分页查询
         /// </summary>
@@ -309,6 +310,26 @@ namespace NBCZ.DAL
 
                 return rep;
             }
+        }
+
+        /// <summary>
+        /// 修改删除状态
+        /// </summary>
+        /// <param name="where"></param>
+        /// <returns></returns>
+        
+        public bool ChangeSotpStatus(string where)
+        {
+            var tableName = typeof(T).Name;
+            string sql = "UPDATE "+tableName+" SET StopFlag =1 ";
+            if (string.IsNullOrWhiteSpace(where))
+            {
+                return false;
+            }
+
+            sql += " where " + where;
+
+            return DapperHelper.Excute(sql) > 0;
         }
     }
 }

@@ -7,7 +7,7 @@ using NBCZ.Model;
 
 namespace NBCZ.BLL
 {
-    public partial class BaseServiceDapperContrib<T> where T : class ,new()
+    public partial class BaseServiceDapperContrib<T> where T : class, new()
     {
         BaseDataDapperContrib<T> dal = new BaseDataDapperContrib<T>();
         /// <summary>
@@ -140,6 +140,11 @@ namespace NBCZ.BLL
         public PageDateRes<T> GetPage(string where, string sort, int page, int resultsPerPage, string fields = "*")
         {
             return dal.GetPage(where, sort, page, resultsPerPage, fields);
+        }
+
+        public bool ChangeSotpStatus(string where)
+        {
+            return dal.ChangeSotpStatus(where);
         }
     }
 }

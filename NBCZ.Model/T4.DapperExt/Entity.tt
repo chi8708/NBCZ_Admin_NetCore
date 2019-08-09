@@ -35,8 +35,10 @@ namespace <#=Config.Namespace#>.Model
 /// <summary>
      	/// <#=column.Remark#>
      	/// </summary>
-	<#if(primaryKey!=null&&column.ColumnName==primaryKey.ColumnName){#>
+	<#if(primaryKey!=null&&column.ColumnName==primaryKey.ColumnName&&(primaryKey.CSharpType=="int"||primaryKey.CSharpType=="long")){#>
 	[Key]
+	<#}else if(primaryKey!=null&&column.ColumnName==primaryKey.ColumnName){#>
+	[ExplicitKey]
 	<#}#>
 	public <#= column.IsNullCSharpType#> <#=column.ColumnName#> { get; set; }
 

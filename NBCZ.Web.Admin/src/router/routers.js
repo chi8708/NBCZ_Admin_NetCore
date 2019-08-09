@@ -117,7 +117,7 @@ export default [
           icon: 'ios-people',
           title: '组织结构'
         },
-        component: () => import('@/view/components/org-tree')
+        component: () => import('@/view/Dept/List.vue')
       }
     ]
   },

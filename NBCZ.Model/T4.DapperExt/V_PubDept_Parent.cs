@@ -14,40 +14,54 @@ using Dapper.Contrib.Extensions;
 namespace NBCZ.Model
 {	
    
-   [Table("Pub_UserRole")]
-    public partial class Pub_UserRole
+   [Table("V_PubDept_Parent")]
+    public partial class V_PubDept_Parent
     {
 
 	   /// <summary>
-     	/// 自增主键
+     	/// 
      	/// </summary>
-		[Key]
-		public int Id { get; set; }
+		public string DeptCode { get; set; }
 
 		/// <summary>
-     	/// 用户编号
+     	/// 
      	/// </summary>
-		public string UserCode { get; set; }
+		public string DeptName { get; set; }
 
 		/// <summary>
-     	/// 角色编号
+     	/// 
      	/// </summary>
-		public string RoleCode { get; set; }
+		public string Remark { get; set; }
 
 		/// <summary>
-     	/// 最后编辑人
+     	/// 
+     	/// </summary>
+		public string ParentCode { get; set; }
+
+		/// <summary>
+     	/// 
+     	/// </summary>
+		public int DeptLevel { get; set; }
+
+		/// <summary>
+     	/// 
      	/// </summary>
 		public string Lmid { get; set; }
 
 		/// <summary>
-     	/// 最后编辑时间
+     	/// 
      	/// </summary>
 		public DateTime? Lmdt { get; set; }
 
 		/// <summary>
-     	/// 停用状态 默认0 未停用 1 停用
+     	/// 
      	/// </summary>
 		public bool? StopFlag { get; set; }
+
+		/// <summary>
+     	/// 
+     	/// </summary>
+		public string ParentName { get; set; }
 
 		   
     }

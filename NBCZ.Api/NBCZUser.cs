@@ -81,4 +81,12 @@ namespace NBCZ
             // public List<Pub_Function> UserFunctions { get; set; }
         }
     }
+
+    public static class NBCZFactory
+    {
+        public static NBCZUser GetNBCZUser(ClaimsPrincipal user)
+        {
+            return new NBCZUser(user);
+        }
+    }
 }
