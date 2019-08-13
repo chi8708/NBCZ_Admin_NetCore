@@ -108,7 +108,7 @@ export default [
           icon: 'ios-infinite',
           title: '权限信息'
         },
-        component: () => import('@/view/components/drag-list/drag-list.vue')
+        component: () => import('@/view/Permission/List.vue')
       },
       {
         path: 'companyManage',
