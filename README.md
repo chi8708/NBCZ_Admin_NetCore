@@ -1,4 +1,4 @@
-一、框架概述 <a href="https://github.com/chi8708/NBCZ_Admin">转至.net framework+layui项目</a>
+一、框架概述 <a href="https://github.com/chi8708/NBCZ_Admin" style="font-size:13px;" >转至.net framework+layui项目</a>
 -------------
 1. NBCZ_Admin_NetCore是一个前后端分离通用权限系统， 用vs2017+sqlserver2012开发工具。
 2. 后端标准三层结构：
