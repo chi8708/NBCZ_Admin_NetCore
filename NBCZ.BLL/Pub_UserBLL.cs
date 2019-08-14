@@ -131,7 +131,7 @@ namespace NBCZ.BLL
         /// <returns></returns>
         public (bool, string) SaveFunctions(string code, List<Pub_UserFunction> functions)
         {
-            var r = userFunctionBLL.DeleteByWhere($"RoleCode='{code}'");
+            var r = userFunctionBLL.DeleteByWhere($"UserCode='{code}'");
             r = userFunctionBLL.InsertBatch(functions);
 
             return (r, r ? "保存成功" : "保存失败");
