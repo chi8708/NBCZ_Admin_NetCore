@@ -60,3 +60,22 @@ export const remove=(id)=>{
     method: 'post'
   })
 }
+
+//角色权限列表
+export const getFunctions=(code)=>{
+  return axios.request({
+    url: 'api/PubRole/GetFunctions/'+code,
+    headers: {Authorization:"Bearer "+token},
+    method: 'post'
+  })
+}
+
+//保存角色
+export const saveFunctions=(code,data)=>{
+  return axios.request({
+    url: 'api/PubRole/saveFunctions/'+code,
+    data,
+    headers: {Authorization:"Bearer "+token},
+    method: 'post'
+  })
+}

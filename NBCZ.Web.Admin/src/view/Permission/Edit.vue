@@ -97,13 +97,13 @@
       footer-hide
       id="parent-modal"
     >
-      <function-tree :parent="this"></function-tree>
+     <div style="height: 500px;overflow: auto;">
+        <function-tree :parent="this"></function-tree>
+     </div>
+
     </Modal>
   </div>
 </template>
-<style>
-  #parent-modal .ivu-modal-body{height: 500px;overflow: auto;}
-</style>
 <script>
 import { getFunctions, add, edit } from "@/api/pubFunction";
 import FunctionTree from "./FunctionTree";

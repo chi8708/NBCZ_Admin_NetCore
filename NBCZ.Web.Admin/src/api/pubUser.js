@@ -51,3 +51,12 @@ export const remove=(id)=>{
     method: 'post'
   })
 }
+
+//用户权限列表
+export const getFunctions=(code)=>{
+  return axios.request({
+    url: 'api/PubUser/GetFunctions/'+code,
+    headers: {Authorization:"Bearer "+token},
+    method: 'post'
+  })
+}

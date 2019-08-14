@@ -121,6 +121,6 @@ namespace NBCZ.BLL
            return dal.EditPassWord(userCode,pwd);
          }
 
-        
+
     }
 }

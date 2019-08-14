@@ -18,6 +18,7 @@ namespace NBCZ.Api.Controllers
     public class PubRoleController : Controller
     {
         Pub_RoleBLL bll = new Pub_RoleBLL();
+        Pub_RoleFunctionBLL roleFunctionBLL = new Pub_RoleFunctionBLL();
 
         [Route("GetList")]
         [HttpPost]
@@ -131,6 +132,47 @@ namespace NBCZ.Api.Controllers
 
             return res;
         }
+
+        /// <summary>
+        /// 获取角色权限
+        /// </summary>
+        /// <returns></returns>
+        [Route("GetFunctions/{code}")]
+        [HttpPost]
+        public DataRes<IEnumerable<string>> GetFunctions(string code)
+        {
+            DataRes<IEnumerable<string>> res = new DataRes<IEnumerable<string>>() { code = ResCode.Success };
+
+            var list = roleFunctionBLL.GetList($"roleCode='{code}'");
+            res.data = list.Select(p => p.FunctionCode);
+
+            return res;
+        }
+
+        /// <summary>
+        /// 保存角色权限
+        /// </summary>
+        /// <returns></returns>
+        [Route("SaveFunctions/{code}")]
+        [HttpPost]
+        public DataRes<bool> SaveFunctions(string code,[FromBody]List<string> functions)
+        {
+            DataRes<bool> res = new DataRes<bool>() { code = ResCode.Success, data = true };
+
+            List<Pub_RoleFunction> list = new List<Pub_RoleFunction>();
+            functions.ForEach(p =>{ list.Add(new Pub_RoleFunction() {FunctionCode=p,RoleCode=code }); });
+            var r = bll.SaveFunctions(code, list);
+            if (!r.Item1)
+            {
+                res.code = ResCode.Error;
+                res.data = false;
+                res.msg = "保存失败";
+            }
+
+            return res;
+        }
+
+
     }
 
 }

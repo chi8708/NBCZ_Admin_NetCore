@@ -56,9 +56,6 @@ namespace NBCZ.DAL
                 return true;
             }
             catch (Exception)
-
-
-
             {
 
                 return false;
@@ -158,18 +155,27 @@ namespace NBCZ.DAL
         /// <returns></returns>
         public bool DeleteByWhere(string where, object param = null)
         {
-            var tableName = typeof(T).Name;
-            StringBuilder sql = new StringBuilder().AppendFormat(" Delete FROM {0} ", tableName);
-            if (string.IsNullOrEmpty(where))
+            try
+            {
+                var tableName = typeof(T).Name;
+                StringBuilder sql = new StringBuilder().AppendFormat(" Delete FROM {0} ", tableName);
+                if (string.IsNullOrEmpty(where))
+                {
+                    return false;
+                }
+
+                sql.AppendFormat(" where {0} ", where);
+                using (SqlConnection cn = new SqlConnection(DapperHelper.ConnStr))
+                {
+                    cn.Execute(sql.ToString(), param);
+                    return true;
+                }
+            }
+            catch (Exception ex)
             {
                 return false;
             }
-
-            sql.AppendFormat(" where {0} ", where);
-            using (SqlConnection cn = new SqlConnection(DapperHelper.ConnStr))
-            {
-                return cn.Execute(sql.ToString(), param) > 0;
-            }
+          
         }
         /// <summary>
         /// 根据实体删除

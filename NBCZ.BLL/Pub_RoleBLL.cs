@@ -13,6 +13,7 @@ namespace NBCZ.BLL
     {
 
         Pub_RoleDAL dal = new Pub_RoleDAL();
+        Pub_RoleFunctionBLL roleFunctionBLL = new Pub_RoleFunctionBLL();
         /// <summary>
         /// 获取部门编号
         /// </summary>
@@ -29,6 +30,15 @@ namespace NBCZ.BLL
             }
 
             return code;
+        }
+
+        public (bool, string) SaveFunctions( string code, List<Pub_RoleFunction> functions)
+        {
+            var r= roleFunctionBLL.DeleteByWhere($"RoleCode='{code}'");
+                r= roleFunctionBLL.InsertBatch(functions);
+
+            return (r, r?"保存成功":"保存失败");
+
         }
     }
 }

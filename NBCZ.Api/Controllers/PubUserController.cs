@@ -21,6 +21,7 @@ namespace NBCZ.Api.Controllers
         private Pub_UserBLL bll = new Pub_UserBLL();
         private V_PubUser_DeptBLL userDeptBLL = new V_PubUser_DeptBLL();
         private Pub_UserRoleBLL userRoleBLL = new Pub_UserRoleBLL();
+        Pub_UserFunctionBLL userFunctionBLL = new Pub_UserFunctionBLL();
 
         [Route("GetAccess")]
         public dynamic GetAccess()
@@ -146,7 +147,7 @@ namespace NBCZ.Api.Controllers
         {
             DataRes<bool> res = new DataRes<bool>() { code = ResCode.Success, data = true };
 
-            var r = bll.ChangeSotpStatus($"id={id}",null);
+            var r = bll.ChangeSotpStatus($"id={id}", null);
             if (!r)
             {
                 res.code = ResCode.Error;
@@ -156,6 +157,23 @@ namespace NBCZ.Api.Controllers
 
             return res;
         }
-        
+
+
+        /// <summary>
+        /// 获取用户权限
+        /// </summary>
+        /// <returns></returns>
+        [Route("GetFunctions/{code}")]
+        [HttpPost]
+        public DataRes<IEnumerable<string>> GetFunctions(string code)
+        {
+            DataRes<IEnumerable<string>> res = new DataRes<IEnumerable<string>>() { code = ResCode.Success };
+
+            var list = userFunctionBLL.GetList($"userCode='{code}'");
+            res.data = list.Select(p=>p.FunctionCode);
+
+            return res;
+        }
+
     }
 }
