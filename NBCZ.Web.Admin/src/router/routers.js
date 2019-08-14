@@ -99,7 +99,7 @@ export default [
           icon: 'md-trending-up',
           title: '角色信息'
         },
-        component: () => import('@/view/components/count-to/count-to.vue')
+        component: () => import('@/view/Role/List.vue')
       },
       {
         path: 'functionManage',

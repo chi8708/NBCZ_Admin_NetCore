@@ -39,6 +39,9 @@ export default {
           })
         })
       })
+      .catch(err => {
+         this.$Message.error("网络请求出错");
+      });
     }
   }
 }
