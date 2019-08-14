@@ -87,7 +87,7 @@ export default [
         name: 'userManage',
         meta: {
           icon: 'md-arrow-dropdown-circle',
-          notCache: true,
+          notCache: false,
           title: '用户信息'
         },
         component: () => import('@/view/User/List.vue')

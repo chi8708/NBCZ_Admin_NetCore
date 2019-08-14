@@ -74,7 +74,7 @@ import Permission from "./Permission";
 import { getPage, remove as removeUser } from "@/api/pubUser";
 
 export default {
-  //  name: 'tables_page',
+  name: 'userManage',//与 router.js notCache:fasle且name相同 将缓存组件。
   components: {
     // Tables
     Edit,
