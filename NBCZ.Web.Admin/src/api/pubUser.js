@@ -60,3 +60,13 @@ export const getFunctions=(code)=>{
     method: 'post'
   })
 }
+
+//保存权限
+export const saveFunctions=(code,data)=>{
+  return axios.request({
+    url: 'api/PubUser/saveFunctions/'+code,
+    data,
+    headers: {Authorization:"Bearer "+token},
+    method: 'post'
+  })
+}

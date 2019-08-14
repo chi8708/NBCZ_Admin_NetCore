@@ -21,7 +21,7 @@
 </template>
 <script>
 import FunctionTreeCheck from "@/view/Permission/FunctionTreeCheck";
-import { edit, getFunctions, saveFunctions } from "@/api/pubRole";
+import { getFunctions, saveFunctions } from "@/api/pubUser";
 export default {
   props: { editRow: Object, parent: Object },
   components: { FunctionTreeCheck },
@@ -33,7 +33,7 @@ export default {
   },
   methods: {
     getFunctions() {
-      getFunctions(this.Row.roleCode)
+      getFunctions(this.Row.userCode)
         .then(res => {
           const resData = res.data;
           const data = resData.data;
@@ -62,7 +62,7 @@ export default {
          checkeds.push(e.value);
         }
       });
-      saveFunctions(this.Row.roleCode, checkeds)
+      saveFunctions(this.Row.userCode, checkeds)
         .then(res => {
           const resData = res.data;
           const data = resData.data;

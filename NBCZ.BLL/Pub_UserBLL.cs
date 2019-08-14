@@ -12,6 +12,8 @@ namespace NBCZ.BLL
     {
         Pub_UserDAL dal = new Pub_UserDAL();
         Pub_UserRoleBLL userRoleBLL = new Pub_UserRoleBLL();
+        Pub_UserFunctionBLL userFunctionBLL = new Pub_UserFunctionBLL();
+
 
         public (bool, string) Add(V_PubUser_Dept model)
         {
@@ -121,6 +123,19 @@ namespace NBCZ.BLL
            return dal.EditPassWord(userCode,pwd);
          }
 
+        /// <summary>
+        /// 保存用户权限
+        /// </summary>
+        /// <param name="code"></param>
+        /// <param name="functions"></param>
+        /// <returns></returns>
+        public (bool, string) SaveFunctions(string code, List<Pub_UserFunction> functions)
+        {
+            var r = userFunctionBLL.DeleteByWhere($"RoleCode='{code}'");
+            r = userFunctionBLL.InsertBatch(functions);
 
+            return (r, r ? "保存成功" : "保存失败");
+
+        }
     }
 }

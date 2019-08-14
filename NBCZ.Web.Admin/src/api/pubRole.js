@@ -70,7 +70,7 @@ export const getFunctions=(code)=>{
   })
 }
 
-//保存角色
+//保存权限
 export const saveFunctions=(code,data)=>{
   return axios.request({
     url: 'api/PubRole/saveFunctions/'+code,

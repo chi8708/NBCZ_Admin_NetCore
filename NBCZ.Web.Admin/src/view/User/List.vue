@@ -52,19 +52,33 @@
     >
       <Edit ref="edit" :parent="this" :edit-row="eidtRow"></Edit>
     </Modal>
+
+     <Modal
+      title="授权"
+      :mask-closable="false"
+      v-model="modelPermission"
+      width="300"
+      scrollable
+      footer-hide
+    >
+      <Permission ref="Permission" :parent="this" :edit-row="eidtRow"></Permission>
+    </Modal>
+
   </div>
 </template>
 <script>
 //import Tables from '_c/tables'
 import "@/assets/css/util.less";
 import Edit from "./Edit";
+import Permission from "./Permission";
 import { getPage, remove as removeUser } from "@/api/pubUser";
 
 export default {
   //  name: 'tables_page',
   components: {
     // Tables
-    Edit
+    Edit,
+    Permission
   },
   data() {
     return {
@@ -73,6 +87,7 @@ export default {
       pageTotal: 0,
       pageCurrent: 1,
       modelEdit: false,
+      modelPermission:false,
       isAdd: true,
       eidtRow: {},
       tableColumns1: [
@@ -103,11 +118,29 @@ export default {
         {
           title: "操作",
           key: "action",
-          width: 200,
+          width: 300,
           align: "center",
           render: (h, params) => {
             return h("div", [
-              // ios-create-outline
+              h(
+                "Button",
+                {
+                  props: {
+                    type: "default",
+                    size: "small",
+                    icon: "md-key"
+                  },
+                  style: {
+                    marginRight: "5px"
+                  },
+                  on: {
+                    click: () => {
+                      this.handlePermission(params);
+                    }
+                  }
+                },
+                "授权"
+              ),
               h(
                 "Button",
                 {
@@ -216,6 +249,10 @@ export default {
     handleEdit(params) {
       this.modelEdit = true;
       this.isAdd = false;
+      this.eidtRow = params.row;
+    },
+    handlePermission(params) {
+      this.modelPermission = true;
       this.eidtRow = params.row;
     },
     removeUser(row) {

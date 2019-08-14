@@ -175,5 +175,28 @@ namespace NBCZ.Api.Controllers
             return res;
         }
 
+        /// <summary>
+        /// 保存用户权限
+        /// </summary>
+        /// <returns></returns>
+        [Route("SaveFunctions/{code}")]
+        [HttpPost]
+        public DataRes<bool> SaveFunctions(string code, [FromBody]List<string> functions)
+        {
+            DataRes<bool> res = new DataRes<bool>() { code = ResCode.Success, data = true };
+
+            List<Pub_UserFunction> list = new List<Pub_UserFunction>();
+            functions.ForEach(p => { list.Add(new Pub_UserFunction() { FunctionCode = p,UserCode = code }); });
+            var r = bll.SaveFunctions(code, list);
+            if (!r.Item1)
+            {
+                res.code = ResCode.Error;
+                res.data = false;
+                res.msg = "保存失败";
+            }
+
+            return res;
+        }
+
     }
 }
