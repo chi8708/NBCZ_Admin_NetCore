@@ -43,7 +43,19 @@
 
 五、版本
 ---------------
-* <a href="https://github.com/chi8708/NBCZ_Admin" >转至.net framework+layui项目</a>
+<table>
+<tr><th>语言/框架</th><th>地址</th><th>备注</th></tr>
+<tr>
+	<td>.Net Framework</td>
+	<td><a href="https://github.com/chi8708/NBCZ_Admin" >.net framework+layui+dapper-extensions</a> </td>
+	<td></td>
+</tr>
+<tr>
+	<td>.Net Core</td>
+	<td><a href="https://github.com/chi8708/NBCZ_Admin_NetCore" >.net core+iview+dapper.contrib</a> </td>
+	<td>前后端分离</td>
+</tr>
+</table>
 
 给Aigu赞赏
 -----------------
