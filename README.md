@@ -34,14 +34,7 @@
 ---------------
 <img src="https://github.com/chi8708/NBCZ_Admin_NetCore/blob/master/main.png" width="900px;">
 
-四、参考文档
---------------------------
-- Dapper：https://github.com/StackExchange/Dapper
-- Dapper.Contrib：https://github.com/StackExchange/Dapper/tree/master/Dapper.Contrib
-* iview： https://www.iviewui.com/
-* iview-admin：http://admin.iviewui.com/login
-
-五、版本
+四、版本
 ---------------
 <table>
 <tr><th>语言/框架</th><th>地址</th><th>协议</th><th>备注</th></tr>
@@ -58,6 +51,15 @@
 	<td>前后端分离</td>
 </tr>
 </table>
+
+五、参考文档
+--------------------------
+- Dapper：https://github.com/StackExchange/Dapper
+- Dapper.Contrib：https://github.com/StackExchange/Dapper/tree/master/Dapper.Contrib
+* iview： https://www.iviewui.com/
+* iview-admin：http://admin.iviewui.com/login
+
+
 
 给Aigu赞赏
 -----------------
