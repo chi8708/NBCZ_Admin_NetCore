@@ -1,6 +1,8 @@
 import axios from 'axios'
 import store from '@/store'
+import { getToken } from '@/libs/util'
 // import { Spin } from 'iview'
+var token=getToken();
 const addErrorLog = errorInfo => {
   const { statusText, status, request: { responseURL } } = errorInfo
   let info = {
@@ -24,6 +26,11 @@ class HttpRequest {
         //
       }
     }
+    //全局请求头 cts 添加
+    if(token){
+        config.headers.Authorization ="Bearer "+token;
+    }
+    
     return config
   }
   destroy (url) {
@@ -35,6 +42,10 @@ class HttpRequest {
   interceptors (instance, url) {
     // 请求拦截
     instance.interceptors.request.use(config => {
+      //cts 添加
+      // if(token){
+      //   config.headers.Authorization ="Bearer "+token;
+      // }
       // 添加全局的loading...
       if (!Object.keys(this.queue).length) {
         // Spin.show() // 不建议开启，因为界面不友好
@@ -61,9 +72,9 @@ class HttpRequest {
         }
       }
       //cts add
-      if(errorInfo.status=="401"){
-        window.location.reload();
-      }
+      // if(errorInfo.status=="401"){
+      //   window.location.reload();
+      // }
       addErrorLog(errorInfo)
       return Promise.reject(error)
     })

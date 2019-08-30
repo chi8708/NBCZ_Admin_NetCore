@@ -14,7 +14,7 @@ export const getPage = ({pageNum ,  pageSize ,  field ,  order,query={}  }) => {
   }
   return axios.request({
     url: 'api/PubUser/GetPage',
-    headers: {Authorization:"Bearer "+token},
+   // headers: {Authorization:"Bearer "+token},
     data,
     method: 'post'
   })
