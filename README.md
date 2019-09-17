@@ -52,10 +52,12 @@
 </tr>
 </table>
 
-五、参考文档
+五、依赖/中间件
 --------------------------
 - Dapper：https://github.com/StackExchange/Dapper
 - Dapper.Contrib：https://github.com/StackExchange/Dapper/tree/master/Dapper.Contrib
+- Swagger：https://swagger.io/
+- log4net：http://logging.apache.org/log4net/download_log4net.cgi
 * iview： https://www.iviewui.com/
 * iview-admin：http://admin.iviewui.com/login
 
