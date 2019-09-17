@@ -23,7 +23,7 @@ namespace NBCZ.Api.Controllers
         private Pub_UserRoleBLL userRoleBLL = new Pub_UserRoleBLL();
         Pub_UserFunctionBLL userFunctionBLL = new Pub_UserFunctionBLL();
 
-        [Route("GetAccess")]
+        [HttpGet,Route("GetAccess")]
         public dynamic GetAccess()
         {
             // var userCode = User.Identity.Name;

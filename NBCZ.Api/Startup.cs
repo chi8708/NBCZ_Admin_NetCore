@@ -15,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace NBCZ.Api
 {
@@ -46,6 +47,28 @@ namespace NBCZ.Api
 
             //参考 https://www.cnblogs.com/aishangyipiyema/p/9262642.html
             JWTConfig(services);
+
+
+            //注册Swagger生成器，定义一个和多个Swagger 文档
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "NBCZ API", Version = "v1",
+                    Description = "NBCZ基础框架API" ,License = new License
+                    {
+                        Name = "MIT",
+                        Url = "https://github.com/chi8708/NBCZ_Admin_NetCore/blob/master/LICENSE"
+                    }
+                    });
+
+                //swagger中控制请求的时候发是否需要在url中增加accesstoken
+                c.OperationFilter<AuthTokenHeaderParameter>();
+
+                // 为 Swagger JSON and UI设置xml文档注释路径
+                //HttpContext.Current.Request.PhysicalApplicationPath
+                var basePath = Path.GetDirectoryName(typeof(Program).Assembly.Location);//获取应用程序所在目录（绝对，不受工作目录影响，建议采用此方法获取路径）
+                var xmlPath = Path.Combine(basePath, "NBCZ.Api.xml");
+                c.IncludeXmlComments(xmlPath);
+            });
 
             //services.AddIdentityServer(options => options.Authentication.CookieAuthenticationScheme = "Cookies")
             //    .AddDeveloperSigningCredential()
@@ -93,6 +116,7 @@ namespace NBCZ.Api
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSeetings.SecretKey))
                 };
             });
+
         }
 
         //中间件
@@ -115,6 +139,17 @@ namespace NBCZ.Api
                 builder.AllowAnyOrigin();
                 // builder.WithOrigins("http://localhost:8080");
             });
+
+            //启用中间件服务生成Swagger作为JSON终结点
+            app.UseSwagger();
+            //启用中间件服务对swagger-ui，指定Swagger JSON终结点
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "NBCZ API V1");
+
+               // c.RoutePrefix = string.Empty;
+            });
+
 
             //app.UseIdentityServer();
             app.UseMvc();

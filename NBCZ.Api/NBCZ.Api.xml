@@ -1,0 +1,203 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NBCZ.Api</name>
+    </assembly>
+    <members>
+        <member name="T:NBCZ.Api.WebApiExceptionAttribute">
+            <summary>
+            异常捕获
+            </summary>
+        </member>
+        <member name="T:NBCZ.Api.Controllers.AuthroizeController">
+            <summary>
+            认证
+            </summary>
+        </member>
+        <member name="M:NBCZ.Api.Controllers.AuthroizeController.Post(NBCZ.Api.LoginViewModel)">
+            <summary>
+            登录获取token
+            </summary>
+            <param name="loginViewModel">登录实体信息</param>
+            <returns></returns>
+        </member>
+        <member name="M:NBCZ.Api.Controllers.PubDeptController.GetChildList(System.String)">
+            <summary>
+            获取子部门列表
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NBCZ.Api.Controllers.PubDeptController.Add(NBCZ.Model.Pub_Department)">
+            <summary>
+            添加
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NBCZ.Api.Controllers.PubDeptController.Edit(NBCZ.Model.Pub_Department)">
+            <summary>
+            编辑
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NBCZ.Api.Controllers.PubDeptController.Delete(System.String)">
+            <summary>
+            删除
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NBCZ.Api.Controllers.PubFunctionController.GetChildList(System.String)">
+            <summary>
+            获取子权限列表
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NBCZ.Api.Controllers.PubFunctionController.Add(NBCZ.Model.Pub_Function)">
+            <summary>
+            添加
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NBCZ.Api.Controllers.PubFunctionController.Edit(NBCZ.Model.Pub_Function)">
+            <summary>
+            编辑
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NBCZ.Api.Controllers.PubFunctionController.Delete(System.String)">
+            <summary>
+            删除
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NBCZ.Api.Controllers.PubRoleController.GetPage(NBCZ.Api.Model.Request.PageDataReq)">
+            <summary>
+            获取角色分页
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NBCZ.Api.Controllers.PubRoleController.Add(NBCZ.Model.Pub_Role)">
+            <summary>
+            添加角色
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NBCZ.Api.Controllers.PubRoleController.Edit(NBCZ.Model.Pub_Role)">
+            <summary>
+            编辑角色
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NBCZ.Api.Controllers.PubRoleController.Delete(System.Int64)">
+            <summary>
+            删除角色
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NBCZ.Api.Controllers.PubRoleController.GetFunctions(System.String)">
+            <summary>
+            获取角色权限
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NBCZ.Api.Controllers.PubRoleController.SaveFunctions(System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            保存角色权限
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NBCZ.Api.Controllers.PubUserController.GetPage(NBCZ.Api.Model.Request.PageDataReq)">
+            <summary>
+            获取用户分页
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NBCZ.Api.Controllers.PubUserController.Add(NBCZ.Model.V_PubUser_Dept)">
+            <summary>
+            添加用户
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NBCZ.Api.Controllers.PubUserController.Edit(NBCZ.Model.V_PubUser_Dept)">
+            <summary>
+            编辑用户
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NBCZ.Api.Controllers.PubUserController.Delete(System.Int64)">
+            <summary>
+            删除用户
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NBCZ.Api.Controllers.PubUserController.GetFunctions(System.String)">
+            <summary>
+            获取用户权限
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NBCZ.Api.Controllers.PubUserController.SaveFunctions(System.String,System.Collections.Generic.List{System.String})">
+            <summary>
+            保存用户权限
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:NBCZ.Api.JwtSeetings.Issuer">
+            <summary>
+            谁颁发的jwt
+            </summary>
+        </member>
+        <member name="P:NBCZ.Api.JwtSeetings.Audience">
+            <summary>
+            谁使用这个jwt
+            </summary>
+        </member>
+        <member name="P:NBCZ.Api.JwtSeetings.SecretKey">
+            <summary>
+            secret是保存在服务器端的，jwt的签发生成也是在服务器端的，secret就是用来进行jwt的签发和jwt的验证，
+            所以，它就是你服务端的私钥，在任何场景都不应该流露出去。一旦客户端得知这个secret, 那就意味着客户端是可以自我签发jwt了
+            通过jwt header中声明的加密方式进行加盐secret组合加密，然后就构成了jwt的第三部分
+            </summary>
+        </member>
+        <member name="P:NBCZ.Api.LoginViewModel.Name">
+            <summary>
+            用户名
+            </summary>
+        </member>
+        <member name="P:NBCZ.Api.LoginViewModel.Password">
+            <summary>
+            密码
+            </summary>
+        </member>
+        <member name="P:NBCZ.Api.ResponseObj`1.Code">
+            <summary>
+            0请求数据错误 1 成功 -1失败
+            </summary>
+        </member>
+        <member name="T:NBCZ.Api.QueryHelper">
+            <summary>
+            搜索条件
+            </summary>
+        </member>
+        <member name="M:NBCZ.Api.QueryHelper.GetWhereStr(Microsoft.AspNetCore.Http.HttpContext)">
+            <summary>
+            获取搜索query
+            </summary>
+        </member>
+        <member name="M:NBCZ.Api.QueryHelper.SqlFilter(System.String)">
+            <summary>
+            过滤危险的字符（SQL注入）
+            </summary>
+            <param name="str"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NBCZ.Api.Startup.JWTConfig(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            使用 Microsoft.AspNetCore.Authentication.JwtBearer
+            </summary>
+            <param name="services"></param>
+        </member>
+        <!-- 对于成员“T:AuthTokenHeaderParameter”忽略有格式错误的 XML 注释 -->
+    </members>
+</doc>

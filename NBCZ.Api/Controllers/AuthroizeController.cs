@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -14,6 +15,9 @@ using NBCZ.Common;
 
 namespace NBCZ.Api.Controllers
 {
+    /// <summary>
+    /// 认证
+    /// </summary>
     [Route("api/[controller]")]
     //jwt1 身份认证
     public class AuthroizeController : ControllerBase
@@ -25,6 +29,12 @@ namespace NBCZ.Api.Controllers
             _jwtSeetings = jwtSeetingsOptions.Value;
         }
 
+        /// <summary>
+        /// 登录获取token
+        /// </summary>
+        /// <param name="loginViewModel">登录实体信息</param>
+        /// <returns></returns>
+        [HttpPost,AllowAnonymous]
         public ActionResult Post([FromBody]LoginViewModel loginViewModel)
         {
             
