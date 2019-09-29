@@ -1,7 +1,7 @@
 一、框架概述 
 -------------
 1. NBCZ_Admin_NetCore是一个前后端分离通用权限系统， 用vs2017+sqlserver2012开发工具。
-2. 后端标准接口分离三层结构：
+2. 后端标准三层结构：
    1. 基于NETStandard2.0标准类库。
    2. Repository（DAL仓储层）使用Dapper.Contrib+Dapper开发。
    3. api使用asp.net core webapi,jwt身份认证。
@@ -58,7 +58,7 @@
 - Dapper.Contrib：https://github.com/StackExchange/Dapper/tree/master/Dapper.Contrib
 - Swagger：https://swagger.io/
 - log4net：http://logging.apache.org/log4net/download_log4net.cgi
-- autofac：https://autofaccn.readthedocs.io/zh/latest/
+
 * iview： https://www.iviewui.com/
 * iview-admin：http://admin.iviewui.com/login
 
