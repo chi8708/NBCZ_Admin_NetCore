@@ -19,3 +19,7 @@
 /NBCZ.Api/lib
 /NBCZ.DAL.Impl/bin
 /NBCZ.DAL.Interface/bin
+/NBCZ.BLL.Interface
+/NBCZ.DAL.Impl
+/NBCZ.DAL.Interface
+/NBCZ.BLL.Impl
