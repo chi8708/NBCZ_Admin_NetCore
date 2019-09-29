@@ -24,16 +24,20 @@ namespace NBCZ.Api.Controllers
     {
         private readonly JwtSeetings _jwtSeetings;
 
-        public AuthroizeController(IOptions<JwtSeetings> jwtSeetingsOptions)
-        {
-            _jwtSeetings = jwtSeetingsOptions.Value;
-        }
+      
 
         IPub_UserBLL userBLL = null;
         IPub_UserFunctionBLL userFunctionBLL = null;
         IPub_RoleFunctionBLL roleFunctionBLL = null;
-        public AuthroizeController(IPub_UserBLL userBLL,IPub_UserFunctionBLL userFunctionBLL ,IPub_RoleFunctionBLL roleFunctionBLL)
+
+
+        //public AuthroizeController()
+        //{
+          
+        //}
+        public AuthroizeController(IOptions<JwtSeetings> jwtSeetingsOptions,IPub_UserBLL userBLL,IPub_UserFunctionBLL userFunctionBLL ,IPub_RoleFunctionBLL roleFunctionBLL)
         {
+            _jwtSeetings = jwtSeetingsOptions.Value;
             this.userBLL = userBLL;
             this.userFunctionBLL = userFunctionBLL;
             this.roleFunctionBLL = roleFunctionBLL;

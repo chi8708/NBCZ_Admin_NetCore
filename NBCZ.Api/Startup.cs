@@ -48,8 +48,8 @@ namespace NBCZ.Api
             //1.全局异常 2.Json 日期格式化
             services
                 .AddMvc(o => { o.Filters.Add(typeof(WebApiExceptionAttribute)); })
-                .AddJsonOptions(options => { options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss"; })
-                .AddControllersAsServices();
+                .AddJsonOptions(options => { options.SerializerSettings.DateFormatString = "yyyy-MM-dd HH:mm:ss"; });
+               // .AddControllersAsServices();
 
             //参考 https://www.cnblogs.com/aishangyipiyema/p/9262642.html
             JWTConfig(services);
