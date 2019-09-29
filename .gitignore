@@ -25,3 +25,5 @@
 /NBCZ.DAL.Interface/obj
 /NBCZ.DAL.Interface/bin
 /*.suo
+/NBCZ.BLL.Impl/bin/Release
+/NBCZ.BLL.Impl/bin/Debug
