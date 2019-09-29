@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Impl\**" />
+    <EmbeddedResource Remove="Impl\**" />
+    <None Remove="Impl\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Interface\Service.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NBCZ.BLL.Interface\NBCZ.BLL.Interface.csproj" />
+    <ProjectReference Include="..\NBCZ.Common\NBCZ.Common.csproj" />
+    <ProjectReference Include="..\NBCZ.DAL.Impl\NBCZ.DAL.Impl.csproj" />
+    <ProjectReference Include="..\NBCZ.DAL.Interface\NBCZ.DAL.Interface.csproj" />
+    <ProjectReference Include="..\NBCZ.Model\NBCZ.Model.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="Interface\T4.DapperExt\IService.tt">
+      <LastOutputs>.\BaseService.cs</LastOutputs>
+      <LastGenOutput>IService.txt</LastGenOutput>
+      <Generator>TextTemplatingFileGenerator</Generator>
+    </None>
+    <None Update="Interface\T4.DapperExt\IService.txt">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>IService.tt</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+  </ItemGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy &quot;$(TargetDir)NBCZ.DAL.Impl.dll&quot; &quot;$(SolutionDir)NBCZ.Api\lib\&quot; /y&#xD;&#xA;xcopy &quot;$(TargetDir)NBCZ.BLL.Impl.dll&quot; &quot;$(SolutionDir)NBCZ.Api\lib\&quot; /y" />
+  </Target>
+</Project>

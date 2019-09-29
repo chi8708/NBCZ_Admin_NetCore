@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk"> <PropertyGroup> <TargetFramework>netstandard2.0</TargetFramework> </PropertyGroup> <ItemGroup>
+  <PackageReference Include="Dapper" Version="1.60.1" />
+  <PackageReference Include="Dapper.Contrib" Version="1.60.1" />
+</ItemGroup> <ItemGroup>
+  <ProjectReference Include="..\NBCZ.Common\NBCZ.Common.csproj" />
+  <ProjectReference Include="..\NBCZ.DAL.Interface\NBCZ.DAL.Interface.csproj" />
+  <ProjectReference Include="..\NBCZ.DBUtility\NBCZ.DBUtility.csproj" />
+  <ProjectReference Include="..\NBCZ.Model\NBCZ.Model.csproj" />
+</ItemGroup> <ItemGroup>
+  <None Update="Impl\T4.DapperExt\Repository.tt">
+    <Generator>TextTemplatingFileGenerator</Generator>
+    <LastGenOutput>Repository.txt</LastGenOutput>
+  </None>
+  <None Update="Impl\T4.DapperExt\Repository.txt">
+    <DesignTime>True</DesignTime>
+    <AutoGen>True</AutoGen>
+    <DependentUpon>Repository.tt</DependentUpon>
+  </None>
+  <None Update="Interface\T4.DapperExt\IRepository.tt">
+    <LastGenOutput>IRepository.txt</LastGenOutput>
+    <Generator>TextTemplatingFileGenerator</Generator>
+  </None>
+  <None Update="Interface\T4.DapperExt\IRepository.txt">
+    <DependentUpon>IRepository.tt</DependentUpon>
+    <DesignTime>True</DesignTime>
+    <AutoGen>True</AutoGen>
+  </None>
+</ItemGroup> <ItemGroup>
+  <Service Include="{508349b6-6b84-4df5-91f0-309beebad82d}" />
+</ItemGroup> </Project>

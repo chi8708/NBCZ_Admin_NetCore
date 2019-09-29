@@ -16,3 +16,11 @@
 /.vs
 /bin
 /NBCZ.Api/log
+/NBCZ.BLL.Impl/obj
+/NBCZ.BLL.Impl/bin
+/NBCZ.BLL.Interface/obj
+/NBCZ.BLL.Interface/bin
+/NBCZ.DAL.Impl/obj
+/NBCZ.DAL.Impl/bin
+/NBCZ.DAL.Interface/obj
+/NBCZ.DAL.Interface/bin
