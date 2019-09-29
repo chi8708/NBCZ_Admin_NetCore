@@ -16,3 +16,6 @@
 /.vs
 /bin
 /NBCZ.Api/log
+/NBCZ.Api/lib
+/NBCZ.DAL.Impl/bin
+/NBCZ.DAL.Interface/bin
