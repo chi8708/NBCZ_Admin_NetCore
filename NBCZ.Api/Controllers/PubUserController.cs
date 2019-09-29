@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NBCZ.Api.Model.Request;
-using NBCZ.BLL;
+using NBCZ.BLL.Interface;
 using NBCZ.Model;
 
 namespace NBCZ.Api.Controllers
@@ -18,10 +18,19 @@ namespace NBCZ.Api.Controllers
     [Route("api/PubUser")]
     public class PubUserController : BaseController
     {
-        private Pub_UserBLL bll = new Pub_UserBLL();
-        private V_PubUser_DeptBLL userDeptBLL = new V_PubUser_DeptBLL();
-        private Pub_UserRoleBLL userRoleBLL = new Pub_UserRoleBLL();
-        Pub_UserFunctionBLL userFunctionBLL = new Pub_UserFunctionBLL();
+        private IPub_UserBLL bll = null;
+        private IV_PubUser_DeptBLL userDeptBLL = null;
+        private IPub_UserRoleBLL userRoleBLL = null;
+        IPub_UserFunctionBLL userFunctionBLL = null;
+
+        public PubUserController(IPub_UserBLL bll, IV_PubUser_DeptBLL userDeptBLL, IPub_UserRoleBLL userRoleBLL, IPub_UserFunctionBLL userFunctionBLL)
+        {
+            this.bll = bll;
+            this.userDeptBLL = userDeptBLL;
+            this.userRoleBLL = userRoleBLL;
+            this.userFunctionBLL = userFunctionBLL;
+        }
+
 
         [HttpGet,Route("GetAccess")]
         public dynamic GetAccess()

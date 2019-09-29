@@ -7,6 +7,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>F:\个人\NetCore\NBCZ\NBCZ.Api\NBCZ.Api.xml</DocumentationFile>
+    <NoWarn>1701;1702;1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,6 +23,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.9.4" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="5.0.0" />
     <PackageReference Include="IdentityServer4" Version="2.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.9" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.4" />
@@ -33,7 +36,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\NBCZ.BLL\NBCZ.BLL.csproj" />
+    <ProjectReference Include="..\NBCZ.BLL.Impl\NBCZ.BLL.Impl.csproj" />
+    <ProjectReference Include="..\NBCZ.BLL.Interface\NBCZ.BLL.Interface.csproj" />
     <ProjectReference Include="..\NBCZ.Common\NBCZ.Common.csproj" />
     <ProjectReference Include="..\NBCZ.Model\NBCZ.Model.csproj" />
   </ItemGroup>

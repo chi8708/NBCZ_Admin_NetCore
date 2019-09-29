@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using NBCZ.BLL;
+using NBCZ.BLL.Interface;
 using NBCZ.Model;
 
 namespace NBCZ.Api.Controllers
@@ -15,8 +15,16 @@ namespace NBCZ.Api.Controllers
     [Route("api/PubFunction")]
     public class PubFunctionController : Controller
     {
-        Pub_FunctionBLL bll = new Pub_FunctionBLL();
-        V_PubFunction_ParentBLL functionParentBLL = new V_PubFunction_ParentBLL();
+
+        IPub_FunctionBLL bll = null;
+        IV_PubFunction_ParentBLL functionParentBLL =null;
+
+        public PubFunctionController(IPub_FunctionBLL bll, IV_PubFunction_ParentBLL functionParentBLL)
+        {
+            this.bll = bll;
+            this.functionParentBLL = functionParentBLL;
+        }
+
         [HttpPost]
         [Route("GetList")]
         public DataRes<List<Pub_Function>> GetList()

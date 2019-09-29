@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using NBCZ.BLL;
+using NBCZ.BLL.Interface;
 using NBCZ.Model;
 
 namespace NBCZ.Api.Controllers
@@ -15,8 +15,15 @@ namespace NBCZ.Api.Controllers
     [Route("api/PubDept")]
     public class PubDeptController : Controller
     {
-        Pub_DepartmentBLL bll = new Pub_DepartmentBLL();
-        V_PubDept_ParentBLL deptParentBLL = new V_PubDept_ParentBLL();
+        IPub_DepartmentBLL bll =null;
+        IV_PubDept_ParentBLL deptParentBLL = null;
+        public PubDeptController(IPub_DepartmentBLL bll, IV_PubDept_ParentBLL dept_ParentBLL)
+        {
+            this.bll = bll;
+            this.deptParentBLL = dept_ParentBLL;
+        }
+       
+
         [HttpPost]
         [Route("GetList")]
         public DataRes<List<Pub_Department>> GetList()

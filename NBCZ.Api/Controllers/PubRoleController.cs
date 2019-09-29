@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NBCZ.Api.Model.Request;
-using NBCZ.BLL;
+using NBCZ.BLL.Interface;
 using NBCZ.Model;
 
 namespace NBCZ.Api.Controllers
@@ -17,8 +17,14 @@ namespace NBCZ.Api.Controllers
     [Authorize]
     public class PubRoleController : Controller
     {
-        Pub_RoleBLL bll = new Pub_RoleBLL();
-        Pub_RoleFunctionBLL roleFunctionBLL = new Pub_RoleFunctionBLL();
+        IPub_RoleBLL bll = null;
+        IPub_RoleFunctionBLL roleFunctionBLL = null;
+        public PubRoleController(IPub_RoleBLL bll, IPub_RoleFunctionBLL roleFunctionBLL)
+        {
+            this.bll = bll;
+            this.roleFunctionBLL = roleFunctionBLL;
+        }
+     
 
         [Route("GetList")]
         [HttpPost]

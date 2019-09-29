@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Mvc;
-using NBCZ.BLL;
+using NBCZ.BLL.Interface;
 using NBCZ.Common;
 using NBCZ.Model;
 
@@ -18,6 +18,11 @@ namespace NBCZ.Api.Controllers
     //[Authorize]
     public class ValuesController : Controller
     {
+        IPub_UserBLL userBLL = null;
+        public ValuesController(IPub_UserBLL userBLL)
+        {
+            this.userBLL = userBLL;
+        }
         // GET api/values
         [HttpGet]
         public IEnumerable<Pub_User> Get()
@@ -26,8 +31,8 @@ namespace NBCZ.Api.Controllers
             //log.Info("info");
             //log.Warning("ok");
             //log.Error("error");
-           
-            return new Pub_UserBLL().GetList("");
+
+           return  userBLL.GetList("");
         }
 
         // GET api/values/5

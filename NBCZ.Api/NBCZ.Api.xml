@@ -192,12 +192,29 @@
             <param name="str"></param>
             <returns></returns>
         </member>
+        <member name="M:NBCZ.Api.Startup.SwaggerConfig(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Swagger
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:NBCZ.Api.Startup.AutofacConfig(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            autofac
+            </summary>
+            <param name="services"></param>
+            <returns></returns>
+        </member>
         <member name="M:NBCZ.Api.Startup.JWTConfig(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
             <summary>
             使用 Microsoft.AspNetCore.Authentication.JwtBearer
             </summary>
             <param name="services"></param>
         </member>
-        <!-- 对于成员“T:AuthTokenHeaderParameter”忽略有格式错误的 XML 注释 -->
+        <member name="T:AuthTokenHeaderParameter">
+            <summary>
+            控制swagger中是否需要添加accesstoken验证
+            </summary>
+        </member>
     </members>
 </doc>

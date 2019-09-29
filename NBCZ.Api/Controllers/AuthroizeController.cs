@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using NBCZ.BLL;
+using NBCZ.BLL.Interface;
 using NBCZ.Common;
 
 namespace NBCZ.Api.Controllers
@@ -29,6 +29,15 @@ namespace NBCZ.Api.Controllers
             _jwtSeetings = jwtSeetingsOptions.Value;
         }
 
+        IPub_UserBLL userBLL = null;
+        IPub_UserFunctionBLL userFunctionBLL = null;
+        IPub_RoleFunctionBLL roleFunctionBLL = null;
+        public AuthroizeController(IPub_UserBLL userBLL,IPub_UserFunctionBLL userFunctionBLL ,IPub_RoleFunctionBLL roleFunctionBLL)
+        {
+            this.userBLL = userBLL;
+            this.userFunctionBLL = userFunctionBLL;
+            this.roleFunctionBLL = roleFunctionBLL;
+        }
         /// <summary>
         /// 登录获取token
         /// </summary>
@@ -43,13 +52,13 @@ namespace NBCZ.Api.Controllers
             {
                 return BadRequest();
             }
-            var users = new Pub_UserBLL().GetList($"StopFlag=0 AND UserName='{loginViewModel.Name}' AND UserPwd='{loginViewModel.Password}'", limits: 1);
+            var users =userBLL.GetList($"StopFlag=0 AND UserName='{loginViewModel.Name}' AND UserPwd='{loginViewModel.Password}'", limits: 1);
             
             if (users.Count>0)
             {
                 var user = users.First();
-                var userFunctions = new  Pub_UserFunctionBLL().GetList($"UserCode='{user.UserCode}'").Select(p=>p.FunctionCode);
-                var roleFunctions = new Pub_RoleFunctionBLL().GetList($" RoleCode IN(SELECT pur.RoleCode FROM Pub_UserRole AS pur WHERE pur.UserCode='{user.UserCode}' )").Select(p=>p.FunctionCode);
+                var userFunctions = userFunctionBLL.GetList($"UserCode='{user.UserCode}'").Select(p=>p.FunctionCode);
+                var roleFunctions = roleFunctionBLL.GetList($" RoleCode IN(SELECT pur.RoleCode FROM Pub_UserRole AS pur WHERE pur.UserCode='{user.UserCode}' )").Select(p=>p.FunctionCode);
                 var functions = userFunctions.Concat(roleFunctions).Distinct();
                 var functionsStr = string.Join(',', functions);
                 var claims = new Claim[]

@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
+
+/// <summary>
 /// 控制swagger中是否需要添加accesstoken验证
 /// </summary>
 public class AuthTokenHeaderParameter : IOperationFilter
