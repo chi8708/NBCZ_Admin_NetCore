@@ -10,7 +10,7 @@ const { homeName } = config
 Vue.use(Router)
 const router = new Router({
   routes,
-  mode: 'history'
+  mode: 'hash' //history iis发布必须用hash，不然会报404
 })
 const LOGIN_PAGE_NAME = 'login'
 

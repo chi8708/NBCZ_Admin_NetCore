@@ -20,7 +20,7 @@ export default {
     // dev: 'https://www.easy-mock.com/mock/5add9213ce4d0e69998a6f51/iview-admin/',
     // pro: 'https://www.easy-mock.com/mock/5add9213ce4d0e69998a6f51/iview-admin/'
      dev: 'http://localhost:8916/',
-     pro: 'https://www.easy-mock.com/mock/5add9213ce4d0e69998a6f51/iview-admin/'
+     pro: 'http://localhost:8916/'
   },
   /**
    * @description 默认打开的首页的路由name值，默认为home
