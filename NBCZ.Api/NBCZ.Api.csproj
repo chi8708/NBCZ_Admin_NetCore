@@ -38,4 +38,10 @@
     <ProjectReference Include="..\NBCZ.Model\NBCZ.Model.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="NBCZ.Api.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
