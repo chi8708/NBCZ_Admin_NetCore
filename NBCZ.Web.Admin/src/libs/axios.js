@@ -71,10 +71,13 @@ class HttpRequest {
           request: { responseURL: config.url }
         }
       }
-      //cts add
-      // if(errorInfo.status=="401"){
-      //   window.location.reload();
-      // }
+        //cts add
+      if(errorInfo.status=="401"&&window.location.hash=='#login'){
+        return Promise.reject(error);
+      }
+      if(errorInfo.status=="401"){
+        window.location.reload();
+      }
       addErrorLog(errorInfo)
       return Promise.reject(error)
     })

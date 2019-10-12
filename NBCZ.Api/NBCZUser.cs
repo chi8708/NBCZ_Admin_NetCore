@@ -58,12 +58,14 @@ namespace NBCZ
             }
         }
 
-        public  string Access
+        public  List<string> Access
         {
             get
             {
-                var access = Identity.FindFirst(p => p.Type == ClaimTypes.UserData).Value;
-                return access;
+                var userFunctions = new Pub_UserFunctionBLL().GetList(string.Format("UserCode='{0}'", this.UserCode)).Select(p => p.FunctionCode);
+                var roleFunctions = new Pub_RoleFunctionBLL().GetList(string.Format(" RoleCode IN(SELECT pur.RoleCode FROM Pub_UserRole AS pur WHERE pur.UserCode='{0}' )", this.UserCode)).Select(p => p.FunctionCode);
+                var functions = userFunctions.Concat(roleFunctions).Distinct().ToList();
+                return functions;
             }
         }
 

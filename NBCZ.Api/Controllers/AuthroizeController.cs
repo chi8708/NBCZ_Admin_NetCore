@@ -48,16 +48,16 @@ namespace NBCZ.Api.Controllers
             if (users.Count>0)
             {
                 var user = users.First();
-                var userFunctions = new  Pub_UserFunctionBLL().GetList($"UserCode='{user.UserCode}'").Select(p=>p.FunctionCode);
-                var roleFunctions = new Pub_RoleFunctionBLL().GetList($" RoleCode IN(SELECT pur.RoleCode FROM Pub_UserRole AS pur WHERE pur.UserCode='{user.UserCode}' )").Select(p=>p.FunctionCode);
-                var functions = userFunctions.Concat(roleFunctions).Distinct();
-                var functionsStr = string.Join(',', functions);
+                //var userFunctions = new  Pub_UserFunctionBLL().GetList($"UserCode='{user.UserCode}'").Select(p=>p.FunctionCode);
+                //var roleFunctions = new Pub_RoleFunctionBLL().GetList($" RoleCode IN(SELECT pur.RoleCode FROM Pub_UserRole AS pur WHERE pur.UserCode='{user.UserCode}' )").Select(p=>p.FunctionCode);
+                //var functions = userFunctions.Concat(roleFunctions).Distinct();
+                //var functionsStr = string.Join(',', functions);
                 var claims = new Claim[]
                 {
                     new Claim(ClaimTypes.Name,user.UserName),
                     new Claim(ClaimTypes.Sid,user.Id.ToString()),
                     new Claim(ClaimTypes.NameIdentifier,user.UserCode),
-                    new Claim(ClaimTypes.UserData,functionsStr),
+                   // new Claim(ClaimTypes.UserData,functionsStr),
                     new Claim(ClaimTypes.MobilePhone,user.Tel),
                     new Claim(ClaimTypes.GroupSid,user.DeptCode)
                 };
