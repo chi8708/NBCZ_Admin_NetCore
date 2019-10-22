@@ -283,6 +283,7 @@ export default {
   },
   watch: {
     editRow(newVal, oldVal) {
+	   this.handleReset();
       this.Row = Object.assign({}, newVal);
       this.Row.sex = this.Row.sex === false ? 0 : 1;
     }
