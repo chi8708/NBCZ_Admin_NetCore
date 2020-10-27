@@ -117,6 +117,18 @@ namespace NBCZ.Api
                 };
             });
 
+
+            //core 2.2 跨域
+            //services.AddCors(op =>
+            //{
+            //    op.AddPolicy("cors", set =>
+            //    {
+            //        set.SetIsOriginAllowed(origin => true)
+            //           .AllowAnyHeader()
+            //           .AllowAnyMethod()
+            //           .AllowCredentials();
+            //    });
+            //});
         }
 
         //中间件
@@ -137,8 +149,12 @@ namespace NBCZ.Api
                 builder.AllowAnyHeader();
                 builder.AllowAnyMethod();
                 builder.AllowAnyOrigin();
+                builder.AllowCredentials();
                 // builder.WithOrigins("http://localhost:8080");
             });
+
+            //core 2.2 跨域
+            //app.UseCors("cors");
 
             //启用中间件服务生成Swagger作为JSON终结点
             app.UseSwagger();

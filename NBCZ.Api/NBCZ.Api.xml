@@ -198,6 +198,6 @@
             </summary>
             <param name="services"></param>
         </member>
-        <!-- 对于成员“T:AuthTokenHeaderParameter”忽略有格式错误的 XML 注释 -->
+        <!-- Badly formed XML comment ignored for member "T:AuthTokenHeaderParameter" -->
     </members>
 </doc>
