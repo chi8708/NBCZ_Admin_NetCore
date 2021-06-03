@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
+using System.Web;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
 
@@ -136,5 +138,37 @@ namespace NBCZ.Api
 
             return str;
         }
+
+
+
+        /// <summary>
+        /// 生成自增编号的SQL执行字符
+        /// 如审批流自增编号AP00000001
+        /// 最后一个编号是  AP00000009
+        /// 本方法生成的SQL执行字符执行后反回AP00000010
+        /// 本方法生成的SQL字符，只做计算，不做存储。计算返回自增后的编号
+        /// </summary>
+        /// <param name="increment">增量, 最后一个编号需要相加的数字, 如AP00000010 + 1 ＝ AP00000011，1就是增量</param>
+        /// <param name="field">需要增量的字段名称，如审批流表M3_ApprovalSetting的ApprovalCode</param>
+        /// <param name="table">表名称</param>
+        /// <param name="prefix">前缀, 如AP00000011，前缀AP</param>
+        /// <param name="digitBit">位数,如AP00000011,数字位8位</param>
+        /// <returns></returns>
+        public static string GenerateIncrementCodeSQLStr(int increment, string field, string table, string prefix, int digitBit)
+        {
+            string digitBitStr = ("").PadLeft(digitBit, '0');
+            StringBuilder sql = new StringBuilder();
+            sql.AppendLine("DECLARE @CodeNum VARCHAR(50) ");
+            sql.AppendLine("DECLARE @resCode VARCHAR(50) ");
+            sql.AppendLine("DECLARE @addNum INT ");
+            sql.AppendFormat("SET @addNum={0} ", increment.ToString());
+            sql.AppendFormat("SELECT @CodeNum = REPLACE((SELECT MAX({0}) AS {0} FROM [dbo].[{1}]), '{2}', '') ", field, table, prefix);
+            sql.AppendFormat("SET @CodeNum = ISNULL(@CodeNum, '{0}')", digitBitStr);
+            sql.AppendFormat("SELECT @resCode = ('{0}' + REPLICATE('0',(Len(@CodeNum)-LEN(@CodeNum+@addNum))) + CAST((@CodeNum+@addNum) AS VARCHAR)) ", prefix);
+            sql.AppendLine("SELECT @resCode");
+            return sql.ToString();
+        }
+
+     
     }
 }
