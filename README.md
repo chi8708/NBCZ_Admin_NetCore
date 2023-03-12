@@ -7,7 +7,9 @@
    3. api使用asp.net core webapi,jwt身份认证。
 3. 前端
    1. 基于vue的iview框架。
-4. 在线预览http://122.51.213.11:8001/#/ 登录名：admin 密码：123123
+4. 在线预览http://106.14.91.48:8918/ 登录名：admin 密码：123123
+5. ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+)
+   *注：此版本不再维护，已升级至<a href="https://github.com/chi8708/CNet_Admin" >.net5前后端分离项目</a>* </sub> 
 --------  
 
 二、配置使用
