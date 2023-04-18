@@ -35,7 +35,7 @@
 
 三、主界面如下：
 ---------------
-<img src="https://github.com/chi8708/CNet_Admin/blob/master/main.png" width="900px;">
+<img src="https://github.com/chi8708/CNet_Admin/blob/main/main.png" width="900px;">
 
 四、版本
 ---------------
